@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeHost Kit - Turn Every Guest Into a 5-Star Review</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0F2F2A;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #C8A96A;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #A8C3B0;
+      margin-bottom: 30px;
+    }
+    .hook-box {
+      background: rgba(200, 169, 106, 0.15);
+      border: 2px solid #C8A96A;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 30px 0;
+      text-align: center;
+    }
+    .hook-box h2 {
+      font-size: 24px;
+      color: #C8A96A;
+      margin-bottom: 12px;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .hook-box p {
+      font-size: 16px;
+      color: #ffffff;
+    }
+    .value-prop {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px 0;
+      border-left: 4px solid #C8A96A;
+    }
+    .value-prop h3 {
+      font-size: 20px;
+      color: #C8A96A;
+      margin-bottom: 12px;
+    }
+    .value-prop p {
+      color: #A8C3B0;
+      font-size: 15px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 30px 0;
+    }
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: #C8A96A;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #A8C3B0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .cta-section {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 20px 48px;
+      background: #C8A96A;
+      color: #0F2F2A;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(200, 169, 106, 0.4);
+    }
+    .cta-button:hover {
+      background: #B89B5E;
+      transform: translateY(-2px);
+    }
+    .features {
+      margin: 40px 0;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-right: 12px;
+      min-width: 40px;
+    }
+    .feature-text h4 {
+      color: #C8A96A;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+    .feature-text p {
+      color: #A8C3B0;
+      font-size: 14px;
+    }
+    .testimonial {
+      background: rgba(200, 169, 106, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 30px 0;
+      border: 1px solid rgba(200, 169, 106, 0.3);
+    }
+    .testimonial p {
+      font-style: italic;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .testimonial-author {
+      color: #C8A96A;
+      font-size: 14px;
+    }
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    .preview-mockup {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 24px;
+      padding: 20px;
+      margin: 30px 0;
+      text-align: center;
+    }
+    .mockup-screen {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      color: #0F2F2A;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .mockup-title {
+      color: #C8A96A;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .mockup-items {
+      text-align: left;
+      font-size: 14px;
+      color: #555;
+    }
+    .mockup-items div {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>How Valuable is a<br>5-Star Review?</h1>
+      <p>One happy guest can bring you 10+ future bookings</p>
+    </div>
+
+    <div class="hook-box">
+      <h2>The Math is Simple</h2>
+      <p>A single 5-star review increases your booking rate by up to <strong>35%</strong>. Multiply that by every future guest who sees your ratings before booking.</p>
+    </div>
+
+    <div style="background: rgba(200, 169, 106, 0.15); border: 2px solid #C8A96A; border-radius: 16px; padding: 24px; margin: 30px 0; text-align: center;">
+      <div style="color: #C8A96A; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">📱 Welcome Packet Included</div>
+      <p style="color: #ffffff; font-size: 16px; margin-bottom: 16px;">Everything your guests need in one beautiful mobile guide</p>
+      <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; max-width: 400px; margin: 0 auto; text-align: left;">
+        <p style="color: #C8A96A; font-weight: 700; margin-bottom: 12px;">✨ What's Inside:</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">🏠 Property Info & Photos</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">📶 WiFi & Access Codes</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">🏋 Building Amenities with Photos</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">🍽 Local Food Spots with Maps</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">📝 Checkout Checklist</p>
+        <p style="color: #ffffff; font-size: 14px; margin-bottom: 6px;">📞 Emergency Contacts (One-Click Call)</p>
+        <p style="color: #ffffff; font-size: 14px;">⭐ Thank You Page with Review Request</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-number">35%</div>
+        <div class="stat-label">Higher Booking Rate</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">10x</div>
+        <div class="stat-label">More Future Bookings</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">90%</div>
+        <div class="stat-label">Guests Read Reviews</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">5★</div>
+        <div class="stat-label">Your Goal</div>
+      </div>
+    </div>
+
+    <div class="payment-section" style="background: rgba(200, 169, 106, 0.1); border: 2px solid #C8A96A; border-radius: 16px; padding: 24px; margin: 30px 0; text-align: center;">
+      <h2 style="color: #C8A96A; font-family: 'Playfair Display', Georgia, serif; margin-bottom: 8px;">Only ₱199</h2>
+      <p style="color: #ffffff; margin-bottom: 20px;">One-time payment for lifetime access to the LuxeHost Welcome Packet Generator</p>
+      <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; max-width: 300px; margin: 0 auto;">
+        <p style="color: #C8A96A; font-weight: 700; margin-bottom: 8px;">PAY VIA GCASH</p>
+        <p style="color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;">0999 883 0291</p>
+        <p style="color: #A8C3B0; font-size: 12px;">Send ₱199 to this number</p>
+      </div>
+    </div>
+
+    <div class="value-prop">
+      <h3>Impress Them From Check-In</h3>
+      <p>When your guest has <strong>everything they need in one click</strong> — WiFi, house rules, local recommendations, checkout instructions — they feel cared for. They feel special. And they leave a 5-star review.</p>
+    </div>
+
+    <div class="preview-mockup">
+      <div class="mockup-screen">
+        <div class="mockup-title">Welcome Packet</div>
+        <div class="mockup-items">
+          <div>🏠 Property Info & Photos</div>
+          <div>📶 WiFi & Access Codes</div>
+          <div>🏋 Amenities Guide</div>
+          <div>🍽 Local Food Spots</div>
+          <div>📝 Checkout Checklist</div>
+          <div>📞 Emergency Contacts</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features">
+      <h2 style="color: #C8A96A; text-align: center; margin-bottom: 20px; font-family: 'Playfair Display', Georgia, serif;">Why Guests Love It</h2>
+      
+      <div class="feature-item">
+        <div class="feature-icon">📱</div>
+        <div class="feature-text">
+          <h4>One-Click Access</h4>
+          <p>All info in a beautiful mobile-friendly packet they can access anytime</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🏋</div>
+        <div class="feature-text">
+          <h4>Building Amenities</h4>
+          <p>Gym, pool, parking with photos — no more "how do I get to the pool?" texts</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🍽</div>
+        <div class="feature-text">
+          <h4>Local Recommendations</h4>
+          <p>Your favorite spots with direct Google Maps links</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">⭐</div>
+        <div class="feature-text">
+          <h4>Built-in Review Request</h4>
+          <p>A dedicated review page that makes leaving 5 stars effortless</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <p>"Since using LuxeHost Kit, my response rate to guest questions dropped by 80%. They just check the packet! And my reviews? All 5 stars."</p>
+      <div class="testimonial-author">— Maria S., Airbnb Superhost</div>
+    </div>
+
+    <div class="cta-section">
+      <h2 style="color: #C8A96A; margin-bottom: 20px; font-family: 'Playfair Display', Georgia, serif;">Ready to Secure Your Next 5-Star Review?</h2>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScJT2tu9n2U0axGbeYiycQ13WmjYwKwDuzDde13jxAqR0rPwQ/viewform?usp=publish-editor" class="cta-button">Get Access Now for Only ₱199</a>
+      <p style="color: #A8C3B0; margin-top: 16px; font-size: 14px;">Pay ₱199 via GCash • Get instant access • Start impressing guests today</p>
+      
+      <div style="background: rgba(200, 169, 106, 0.15); border: 2px solid #C8A96A; border-radius: 16px; padding: 24px; margin-top: 30px; text-align: center;">
+        <div style="color: #C8A96A; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">⏰ Limited Time Bundle Offer</div>
+        <p style="color: #ffffff; font-size: 16px; margin-bottom: 12px;">Get the <strong>Philippine Rental Checklist</strong> absolutely FREE!</p>
+        <p style="color: #A8C3B0; font-size: 13px; margin-bottom: 16px;">(Originally ₱99 - Yours free with LuxeHost Kit)</p>
+        <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; text-align: left; max-width: 400px; margin: 0 auto;">
+          <p style="color: #C8A96A; font-weight: 700; margin-bottom: 12px;">📋 What's Inside the Checklist:</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 1 — Before the Lease: Legal Basis (RA 9653)</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 2 — Property Inspection Report</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 3 — Lease Agreement Clauses</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 4 — Security Deposit Rules</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 5 — Rent Rules & Due Dates</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 6 — Utilities & Common Areas</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 7 — Maintenance & Repairs</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 8 — Renewal & Termination</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 9 — Move-Out & Refund</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">✅ Section 10 — Move-In Documentation</p>
+          <p style="color: #ffffff; font-size: 14px; margin-bottom: 8px;">🎁 <strong>Bonus: 6 Ready-to-Use Templates:</strong></p>
+          <p style="color: #ffffff; font-size: 13px; margin-bottom: 6px; padding-left: 15px;">1. Lease Agreement Cover Page</p>
+          <p style="color: #ffffff; font-size: 13px; margin-bottom: 6px; padding-left: 15px;">2. Move-In Condition Report</p>
+          <p style="color: #ffffff; font-size: 13px; margin-bottom: 6px; padding-left: 15px;">3. 30-Day Lease Termination Notice</p>
+          <p style="color: #ffffff; font-size: 13px; margin-bottom: 6px; padding-left: 15px;">4. Security Deposit Refund Receipt</p>
+          <p style="color: #ffffff; font-size: 13px; margin-bottom: 6px; padding-left: 15px;">5. Rent Increase Notice Template</p>
+          <p style="color: #ffffff; font-size: 13px; padding-left: 15px;">6. Condo for Airbnb? Read This First</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section" style="margin-top: 40px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScJT2tu9n2U0axGbeYiycQ13WmjYwKwDuzDde13jxAqR0rPwQ/viewform?usp=publish-editor" class="cta-button">Get Access Now for Only ₱199</a>
+      <p style="color: #A8C3B0; margin-top: 16px; font-size: 14px;">Pay ₱199 via GCash • Get instant access • Start impressing guests today</p>
+    </div>
+
+    <div class="cta-section" style="margin-top: 40px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScJT2tu9n2U0axGbeYiycQ13WmjYwKwDuzDde13jxAqR0rPwQ/viewform?usp=publish-editor" class="cta-button">Get Access Now for Only ₱199</a>
+      <p style="color: #A8C3B0; margin-top: 16px; font-size: 14px;">Pay ₱199 via GCash • Get instant access • Start impressing guests today</p>
+    </div>
+
+    <div class="footer">
+      <p>LuxeHost Kit — Welcome Packets That Wow</p>
+      <p style="margin-top: 8px;">Powered by Deep Forest Green & Muted Gold</p>
+    </div>
+  </div>
+</body>
+</html>

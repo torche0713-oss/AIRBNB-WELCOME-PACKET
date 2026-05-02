@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Packet Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0F2F2A; min-height: 100vh; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .header { text-align: center; color: white; margin-bottom: 30px; padding: 20px; }
+    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header p { color: #A8C3B0; font-size: 14px; }
+    .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .card h2 { font-size: 18px; color: #0F2F2A; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #A8C3B0; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    input, textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 14px; margin-bottom: 16px; font-family: 'Segoe UI', sans-serif; transition: border-color 0.2s; }
+    input:focus, textarea:focus { outline: none; border-color: #C8A96A; }
+    textarea { min-height: 70px; resize: vertical; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-2 input { margin-bottom: 0; }
+    .photo-upload { width: 120px; height: 120px; border-radius: 50%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin: 0 auto 20px; border: 3px solid #A8C3B0; transition: border-color 0.2s; }
+    .photo-upload:hover { border-color: #C8A96A; }
+    .photo-upload img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .photo-upload.has-photo img { display: block; }
+    .photo-upload.has-photo .placeholder { display: none; }
+    .placeholder { text-align: center; color: #999; }
+    .placeholder span { font-size: 40px; display: block; margin-bottom: 4px; }
+    .placeholder small { font-size: 11px; }
+    .generate-btn { width: 100%; padding: 20px; background: #C8A96A; color: white; border: none; border-radius: 50px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 8px 24px rgba(200,169,106,0.4); }
+    .generate-btn:hover { background: #B89B5E; transform: translateY(-2px); }
+    .generate-btn:active { transform: scale(0.98); }
+    .preview { background: rgba(255,255,255,0.1); border: 2px solid rgba(200,169,106,0.5); border-radius: 16px; padding: 24px; margin-top: 24px; display: none; text-align: center; }
+    .preview.show { display: block; }
+    .preview h3 { color: white; margin-bottom: 12px; }
+    .preview p { color: #A8C3B0; font-size: 14px; margin-bottom: 16px; }
+    .download-link { display: inline-block; padding: 16px 32px; background: #C8A96A; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 16px; transition: background 0.2s; }
+    .download-link:hover { background: #B89B5E; }
+    .footer { text-align: center; color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 30px; padding-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Welcome Packet Generator</h1>
+      <p>Create a custom mobile guide for your guests</p>
+    </div>
+
+    <div class="card">
+      <h2>Property Info</h2>
+      <label>Property Name</label>
+      <input type="text" id="propName" placeholder="Beach House Paradise">
+
+      <label>Host Name</label>
+      <input type="text" id="hostName" placeholder="Juan Dela Cruz">
+
+      <label>Welcome Message</label>
+      <textarea id="hostMessage" placeholder='Feel at home. Everything you need is just one tap away.'>Feel at home. Everything you need is just one tap away.</textarea>
+
+      <label>Property Address</label>
+      <input type="text" id="propAddress" placeholder="123 Beach Road, Malibu">
+      
+      <label>Property Photo</label>
+      <div class="photo-upload" id="propPhotoUpload">
+        <div class="placeholder">
+          <span>🏠</span>
+          <small>Property photo</small>
+        </div>
+        <img id="propImage" src="" alt="Property">
+      </div>
+      <input type="file" id="propPhotoInput" accept="image/*" style="display:none;">
+      
+      <label>Host Photo</label>
+      <div class="photo-upload" id="photoUpload">
+        <div class="placeholder">
+          <span>&#128100;</span>
+          <small>Tap to upload</small>
+        </div>
+        <img id="hostPhoto" src="" alt="Host">
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;">
+    </div>
+
+    <div class="card">
+      <h2>WiFi</h2>
+      <div class="grid-2">
+        <div>
+          <label>Network Name</label>
+          <input type="text" id="wifiName" placeholder="MyWiFi">
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="text" id="wifiPass" placeholder="password123">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Check-In</h2>
+      <label>Key Box Location</label>
+      <input type="text" id="keyLocation" placeholder="Behind flower pot, left side of main door">
+      <label>Access Code</label>
+      <input type="text" id="keyCode" placeholder="1234">
+    </div>
+
+    <div class="card">
+      <h2>Check-Out</h2>
+      <label>Checkout Time</label>
+      <input type="text" id="checkoutTime" placeholder="11:00 AM">
+    </div>
+
+    <div class="card">
+      <h2>House Rules</h2>
+      <div class="grid-2">
+        <div>
+          <label>Smoking</label>
+          <input type="text" id="smoking" value="No smoking">
+        </div>
+        <div>
+          <label>Quiet Hours</label>
+          <input type="text" id="quietHours" value="Quiet hours (10PM-7AM)">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <label>Parties</label>
+          <input type="text" id="parties" value="No parties">
+        </div>
+        <div>
+          <label>Pets</label>
+          <input type="text" id="pets" value="Pets: Not Allowed">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Food & Restaurants</h2>
+      <label>Coffee</label>
+      <input type="text" id="coffee" placeholder="Starbucks - SM City">
+      <label>Breakfast</label>
+      <input type="text" id="breakfast" placeholder="Pancake House - Main St">
+      <label>Lunch</label>
+      <input type="text" id="lunch" placeholder="Burger Joint - 2nd Ave">
+      <label>Dinner</label>
+      <input type="text" id="dinner" placeholder="Seafood Grill - Beach Rd">
+    </div>
+
+    <div class="card">
+      <h2>Explore Nearby</h2>
+      <label>Tourist Spot</label>
+      <input type="text" id="touristSpot" placeholder="Manila Ocean Park">
+      <label>Activity</label>
+      <input type="text" id="activity" placeholder="Island Hopping">
+      <label>Shopping</label>
+      <input type="text" id="shopping" placeholder="SM Mall of Asia">
+      <label>Transport</label>
+      <input type="text" id="transport" placeholder="Bus Stop - Main St">
+    </div>
+
+    <div class="card">
+      <h2>House Guide</h2>
+      <p style="color: #A8C3B0; font-size: 13px; margin-bottom: 12px;">Add instructions for common appliances</p>
+      <label>AC / Air Conditioning</label>
+      <input type="text" id="acGuide" placeholder="Turn on via remote, set to 22°C">
+      <label>TV</label>
+      <input type="text" id="tvGuide" placeholder="Power on, select HDMI 1">
+      <label>Stove / Oven</label>
+      <input type="text" id="stoveGuide" placeholder="Turn knob to ignite">
+      <label>Washing Machine</label>
+      <input type="text" id="washerGuide" placeholder="Powder: 1 scoop, Normal mode, 30 mins">
+      <label>WiFi Router</label>
+      <input type="text" id="routerGuide" placeholder="Restart: unplug 30 sec, plug back in">
+      <label>Water Heater</label>
+      <input type="text" id="heaterGuide" placeholder="Switch on, wait 5 mins for hot water">
+    </div>
+
+    <div class="card">
+      <h2>Building Amenities</h2>
+      
+      <label>Gym</label>
+      <input type="text" id="gym" placeholder="Located on 2nd floor">
+      <div class="photo-upload" id="gymPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
+        <div class="placeholder" style="font-size:12px;">
+          <span style="font-size:24px;">🏋</span>
+          <small>Gym photo</small>
+        </div>
+        <img id="gymImage" src="" alt="Gym" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <input type="file" id="gymPhotoInput" accept="image/*" style="display:none;">
+      
+      <label>Pool</label>
+      <input type="text" id="pool" placeholder="Open 6AM-10PM">
+      <div class="photo-upload" id="poolPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
+        <div class="placeholder" style="font-size:12px;">
+          <span style="font-size:24px;">🏊</span>
+          <small>Pool photo</small>
+        </div>
+        <img id="poolImage" src="" alt="Pool" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <input type="file" id="poolPhotoInput" accept="image/*" style="display:none;">
+      
+      <label>Parking</label>
+      <input type="text" id="parking" placeholder="Basement Level B1">
+      <div class="photo-upload" id="parkingPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
+        <div class="placeholder" style="font-size:12px;">
+          <span style="font-size:24px;">🅿</span>
+          <small>Parking photo</small>
+        </div>
+        <img id="parkingImage" src="" alt="Parking" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <input type="file" id="parkingPhotoInput" accept="image/*" style="display:none;">
+      
+      <label>Security</label>
+      <input type="text" id="security" placeholder="24/7 Security">
+      <div class="photo-upload" id="securityPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
+        <div class="placeholder" style="font-size:12px;">
+          <span style="font-size:24px;">🔒</span>
+          <small>Security photo</small>
+        </div>
+        <img id="securityImage" src="" alt="Security" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <input type="file" id="securityPhotoInput" accept="image/*" style="display:none;">
+      
+      <label>Other Amenities</label>
+      <textarea id="otherAmenities" placeholder="Lobby, Elevator, etc."></textarea>
+      <div class="photo-upload" id="otherPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
+        <div class="placeholder" style="font-size:12px;">
+          <span style="font-size:24px;">✨</span>
+          <small>Other photo</small>
+        </div>
+        <img id="otherImage" src="" alt="Other" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <input type="file" id="otherPhotoInput" accept="image/*" style="display:none;">
+    </div>
+
+    <div class="card">
+      <h2>Contacts</h2>
+      <div class="grid-2">
+        <div>
+          <label>Host Phone</label>
+          <input type="text" id="hostPhone" placeholder="+63 912 345 6789">
+        </div>
+        <div>
+          <label>Emergency</label>
+          <input type="text" id="emergency" placeholder="911">
+        </div>
+      </div>
+      <label>Maintenance</label>
+      <input type="text" id="maintenance" placeholder="+63 998 765 4321">
+    </div>
+
+    <div class="card">
+      <h2>Review</h2>
+      <label>Airbnb Review Link</label>
+      <input type="text" id="reviewLink" placeholder="https://www.airbnb.com/your-review-link">
+      <label style="margin-top:16px;">Thank You Message</label>
+      <textarea id="thankYouMessage" rows="3" placeholder="Thank you for staying with us! We hope you enjoyed your stay."></textarea>
+      <label style="margin-top:16px;">Thank You Image</label>
+      <div class="photo-upload" id="thankYouPhotoUpload">
+        <div class="placeholder"><span>&#128247;</span><small>Click to upload image</small></div>
+        <img id="thankYouImage" alt="Thank You Photo">
+      </div>
+      <input type="file" id="thankYouPhotoInput" accept="image/*" style="display:none;">
+    </div>
+
+    <button class="generate-btn" id="generateBtn">Generate Welcome Packet</button>
+
+    <div class="preview" id="preview">
+      <h3>Packet Generated!</h3>
+      <p>Download and share this file with your guests:</p>
+      <a href="#" id="downloadLink" class="download-link">Download HTML File</a>
+      <p style="margin-top: 12px; font-size: 12px;">Share via email, messaging apps, or upload to Google Drive</p>
+    </div>
+
+    <div class="footer">Powered by LuxeHost Kit</div>
+  </div>
+
+  <script>
+    'use strict';
+    
+    let photoData = '';
+    let propPhotoData = '';
+    let gymPhotoData = '';
+    let poolPhotoData = '';
+    let parkingPhotoData = '';
+    let securityPhotoData = '';
+    let otherPhotoData = '';
+    let thankYouPhotoData = '';
+    
+    function initPhotoUpload() {
+      // Host photo
+      const photoInput = document.getElementById('photoInput');
+      const photoUpload = document.getElementById('photoUpload');
+      const hostPhoto = document.getElementById('hostPhoto');
+      
+      if (photoInput && photoUpload && hostPhoto) {
+        photoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          photoInput.click();
+        });
+        
+        photoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            photoData = e.target.result;
+            hostPhoto.src = photoData;
+            photoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Property photo
+      const propPhotoInput = document.getElementById('propPhotoInput');
+      const propPhotoUpload = document.getElementById('propPhotoUpload');
+      const propImage = document.getElementById('propImage');
+      
+      if (propPhotoInput && propPhotoUpload && propImage) {
+        propPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          propPhotoInput.click();
+        });
+        
+        propPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            propPhotoData = e.target.result;
+            propImage.src = propPhotoData;
+            propPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Gym photo
+      const gymPhotoInput = document.getElementById('gymPhotoInput');
+      const gymPhotoUpload = document.getElementById('gymPhotoUpload');
+      const gymImage = document.getElementById('gymImage');
+      
+      if (gymPhotoInput && gymPhotoUpload && gymImage) {
+        gymPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          gymPhotoInput.click();
+        });
+        
+        gymPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            gymPhotoData = e.target.result;
+            gymImage.src = gymPhotoData;
+            gymPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Pool photo
+      const poolPhotoInput = document.getElementById('poolPhotoInput');
+      const poolPhotoUpload = document.getElementById('poolPhotoUpload');
+      const poolImage = document.getElementById('poolImage');
+      
+      if (poolPhotoInput && poolPhotoUpload && poolImage) {
+        poolPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          poolPhotoInput.click();
+        });
+        
+        poolPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            poolPhotoData = e.target.result;
+            poolImage.src = poolPhotoData;
+            poolPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Parking photo
+      const parkingPhotoInput = document.getElementById('parkingPhotoInput');
+      const parkingPhotoUpload = document.getElementById('parkingPhotoUpload');
+      const parkingImage = document.getElementById('parkingImage');
+      
+      if (parkingPhotoInput && parkingPhotoUpload && parkingImage) {
+        parkingPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          parkingPhotoInput.click();
+        });
+        
+        parkingPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            parkingPhotoData = e.target.result;
+            parkingImage.src = parkingPhotoData;
+            parkingPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Security photo
+      const securityPhotoInput = document.getElementById('securityPhotoInput');
+      const securityPhotoUpload = document.getElementById('securityPhotoUpload');
+      const securityImage = document.getElementById('securityImage');
+      
+      if (securityPhotoInput && securityPhotoUpload && securityImage) {
+        securityPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          securityPhotoInput.click();
+        });
+        
+        securityPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            securityPhotoData = e.target.result;
+            securityImage.src = securityPhotoData;
+            securityPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      
+      // Other photo
+      const otherPhotoInput = document.getElementById('otherPhotoInput');
+      const otherPhotoUpload = document.getElementById('otherPhotoUpload');
+      const otherImage = document.getElementById('otherImage');
+      
+      if (otherPhotoInput && otherPhotoUpload && otherImage) {
+        otherPhotoUpload.addEventListener('click', function(e) {
+          e.preventDefault();
+          otherPhotoInput.click();
+        });
+        
+        otherPhotoInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Photo must be under 5MB');
+            this.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            otherPhotoData = e.target.result;
+            otherImage.src = otherPhotoData;
+            otherPhotoUpload.classList.add('has-photo');
+          };
+          reader.onerror = function() {
+            alert('Failed to load photo. Please try another image.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Thank You photo
+      try {
+        const thankYouPhotoInput = document.getElementById('thankYouPhotoInput');
+        const thankYouPhotoUpload = document.getElementById('thankYouPhotoUpload');
+        const thankYouImage = document.getElementById('thankYouImage');
+
+        if (thankYouPhotoInput && thankYouPhotoUpload && thankYouImage) {
+          thankYouPhotoUpload.addEventListener('click', function(e) {
+            e.preventDefault();
+            thankYouPhotoInput.click();
+          });
+
+          thankYouPhotoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+
+            if (file.size > 5 * 1024 * 1024) {
+              alert('Photo must be under 5MB');
+              this.value = '';
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              thankYouPhotoData = e.target.result;
+              thankYouImage.src = thankYouPhotoData;
+              thankYouPhotoUpload.classList.add('has-photo');
+            };
+            reader.onerror = function() {
+              alert('Failed to load photo. Please try another image.');
+            };
+            reader.readAsDataURL(file);
+          });
+        } else {
+          console.log('Thank You photo elements not found:', thankYouPhotoInput, thankYouPhotoUpload, thankYouImage);
+        }
+      } catch(e) {
+        console.error('Error in Thank You photo handler:', e);
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function generatePacket() {
+      const data = {
+        propName: document.getElementById('propName').value || 'Property Name',
+        propAddress: document.getElementById('propAddress').value || 'Property Address',
+        hostName: document.getElementById('hostName').value || 'Host Name',
+        hostMessage: document.getElementById('hostMessage').value || 'Feel at home.',
+        photoData: photoData,
+        propPhotoData: propPhotoData,
+        gym: document.getElementById('gym').value || 'Gym',
+        gymPhotoData: gymPhotoData,
+        pool: document.getElementById('pool').value || 'Pool',
+        poolPhotoData: poolPhotoData,
+        parking: document.getElementById('parking').value || 'Parking',
+        parkingPhotoData: parkingPhotoData,
+        security: document.getElementById('security').value || 'Security',
+        securityPhotoData: securityPhotoData,
+        otherAmenities: document.getElementById('otherAmenities').value || 'Other amenities',
+        otherPhotoData: otherPhotoData,
+        acGuide: document.getElementById('acGuide').value || 'Turn on via remote, set to 22°C',
+        tvGuide: document.getElementById('tvGuide').value || 'Power on, select HDMI 1',
+        stoveGuide: document.getElementById('stoveGuide').value || 'Turn knob to ignite',
+        washerGuide: document.getElementById('washerGuide').value || 'Powder: 1 scoop, Normal mode, 30 mins',
+        routerGuide: document.getElementById('routerGuide').value || 'Restart: unplug 30 sec, plug back in',
+        heaterGuide: document.getElementById('heaterGuide').value || 'Switch on, wait 5 mins for hot water',
+        wifiName: document.getElementById('wifiName').value || 'WiFi Name',
+        wifiPass: document.getElementById('wifiPass').value || 'password',
+        keyLocation: document.getElementById('keyLocation').value || 'Key location',
+        keyCode: document.getElementById('keyCode').value || '1234',
+        checkoutTime: document.getElementById('checkoutTime').value || '11:00 AM',
+        smoking: document.getElementById('smoking').value,
+        quietHours: document.getElementById('quietHours').value,
+        parties: document.getElementById('parties').value,
+        pets: document.getElementById('pets').value,
+        coffee: document.getElementById('coffee').value || 'Coffee shop',
+        breakfast: document.getElementById('breakfast').value || 'Breakfast place',
+        lunch: document.getElementById('lunch').value || 'Lunch place',
+        dinner: document.getElementById('dinner').value || 'Dinner place',
+        touristSpot: document.getElementById('touristSpot').value || 'Tourist Spot',
+        activity: document.getElementById('activity').value || 'Activity',
+        shopping: document.getElementById('shopping').value || 'Shopping',
+        transport: document.getElementById('transport').value || 'Transport',
+        hostPhone: document.getElementById('hostPhone').value || 'Phone',
+        emergency: document.getElementById('emergency').value || '911',
+        maintenance: document.getElementById('maintenance').value || 'Maintenance',
+        reviewLink: document.getElementById('reviewLink').value || 'https://www.airbnb.com',
+        thankYouMessage: document.getElementById('thankYouMessage').value || 'Thank you for staying with us!',
+        thankYouPhotoData: thankYouPhotoData
+      };
+
+      const photoTag = data.photoData ? 
+        '<img src="' + data.photoData + '" style="width:100px;height:100px;border-radius:50%;margin:0 auto 12px;display:block;border:3px solid rgba(255,255,255,0.3);object-fit:cover;">' : 
+        '<div style="font-size:96px;opacity:0.9;">&#127968;</div>';
+
+      let html = '<!DOCTYPE html>\n';
+      html += '<html lang="en">\n';
+      html += '<head>\n';
+      html += '  <meta charset="UTF-8">\n';
+      html += '  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">\n';
+      html += '  <title>' + escapeHtml(data.propName) + ' - Guest Guide</title>\n';
+      html += '  <style>\n';
+      html += '    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}\n';
+      html += '    :root{--deep-forest:#0F2F2A;--soft-sage:#A8C3B0;--warm-white:#F7F7F5;--charcoal:#1E1E1E;--muted-gold:#C8A96A;}\n';
+      html += '    body{font-family:"Segoe UI",sans-serif;line-height:1.6;color:var(--charcoal);background:var(--deep-forest);overflow-x:hidden;-webkit-font-smoothing:antialiased;}\n';
+      html += '    .app-container{max-width:1080px;width:100%;margin:0 auto;position:relative;background:white;}\n';
+      html += '    .page{display:none;flex-direction:column;align-items:center;gap:24px;padding:80px 20px 160px;text-align:center;min-height:100vh;}\n';
+      html += '    .page.active{display:flex;}\n';
+      html += '    .page-content{display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;max-width:100%;padding:10px 0;}\n';
+      html += '    h1,h2{font-family:"Playfair Display",serif;font-weight:700;line-height:1.2;color:var(--deep-forest);}\n';
+      html += '    h1{font-size:42px;}h2{font-size:32px;}\n';
+      html += '    .subtext{font-size:18px;color:#666;max-width:500px;font-weight:300;letter-spacing:0.5px;line-height:1.5;}\n';
+      html += '    .cta-btn{padding:18px 32px;font-size:16px;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:all 0.2s ease;min-height:56px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;}\n';
+      html += '    .cta-btn:active{transform:scale(0.98);}\n';
+      html += '    .gold-btn{background:var(--muted-gold);color:white;box-shadow:0 8px 24px rgba(200,169,106,0.3);}\n';
+      html += '    .back-btn{position:fixed;top:20px;left:20px;background:none;border:2px solid rgba(168,195,176,0.4);width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;color:var(--charcoal);display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:20;}\n';
+      html += '    .back-btn:active{background:var(--warm-white);}\n';
+      html += '    .dark-page .back-btn{border-color:rgba(255,255,255,0.3);color:white;}\n';
+      html += '    .page-cover{background:linear-gradient(135deg,var(--deep-forest) 0%,var(--soft-sage) 100%);color:white;padding-top:60px;}\n';
+      html += '    .page-cover h1{color:white;font-size:44px;line-height:1.1;}\n';
+      html += '    .page-cover .subtext{color:rgba(255,255,255,0.8);}\n';
+      html += '    .host-section{margin-top:20px;padding:20px;background:rgba(255,255,255,0.1);border-radius:20px;max-width:100%;border:1px solid rgba(255,255,255,0.2);}\n';
+      html += '    .host-name{font-family:"Playfair Display",serif;font-size:20px;color:white;margin-bottom:6px;}\n';
+      html += '    .host-message{font-size:14px;color:rgba(255,255,255,0.9);font-style:italic;line-height:1.5;}\n';
+      html += '    .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:100%;}\n';
+      html += '    .menu-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px;border-radius:16px;background:white;cursor:pointer;transition:all 0.2s ease;border:1px solid rgba(168,195,176,0.2);box-shadow:0 4px 16px rgba(0,0,0,0.04);min-height:110px;justify-content:center;}\n';
+      html += '    .menu-item:active{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}\n';
+      html += '    .menu-icon-circle{width:70px;height:70px;border-radius:50%;background:var(--warm-white);display:flex;align-items:center;justify-content:center;border:2px solid rgba(168,195,176,0.3);}\n';
+      html += '    .menu-icon-emoji{font-size:32px;}\n';
+      html += '    .menu-label{font-size:14px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;}\n';
+      html += '    .light-page{background:var(--warm-white);}\n';
+      html += '    .dark-page{background:var(--deep-forest);color:white;}\n';
+      html += '    .dark-page h2{color:white;}\n';
+      html += '    .dark-page .subtext{color:var(--soft-sage);}\n';
+      html += '    .card{padding:20px 16px;background:white;border-radius:20px;width:100%;max-width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(168,195,176,0.2);text-align:left;}\n';
+      html += '    .dark-page .card{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:white;}\n';
+      html += '    .wifi-credential{font-size:24px;font-weight:600;margin:12px 0;color:var(--deep-forest);word-break:break-all;}\n';
+      html += '    .dark-page .wifi-credential{color:white;}\n';
+      html += '    .copy-btn{padding:14px 28px;font-size:14px;font-weight:600;border:none;border-radius:50px;cursor:pointer;background:var(--muted-gold);color:white;min-height:48px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;margin-top:16px;}\n';
+      html += '    .checklist{list-style:none;width:100%;max-width:100%;text-align:left;font-size:16px;font-weight:400;}\n';
+      html += '    .checklist li{padding:14px 0;border-bottom:1px solid rgba(168,195,176,0.2);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}\n';
+      html += '    .checklist li:last-child{border-bottom:none;}\n';
+      html += '    .dark-page .checklist li{border-bottom-color:rgba(255,255,255,0.2);}\n';
+      html += '    .step-card{display:flex;align-items:center;gap:14px;padding:16px;background:white;border-radius:16px;width:100%;max-width:100%;box-shadow:0 4px 16px rgba(0,0,0,0.04);border:1px solid rgba(168,195,176,0.2);margin-bottom:12px;text-align:left;}\n';
+      html += '    .dark-page .step-card{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);}\n';
+      html += '    .step-number{width:44px;height:44px;min-width:44px;border-radius:12px;background:var(--deep-forest);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}\n';
+      html += '    .step-text{font-size:16px;font-weight:500;color:var(--charcoal);line-height:1.4;}\n';
+      html += '    .dark-page .step-text{color:white;}\n';
+      html += '    .place-card{width:100%;max-width:100%;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(168,195,176,0.2);margin-bottom:16px;}\n';
+      html += '    .place-image{width:100%;height:160px;background:linear-gradient(135deg,var(--soft-sage),var(--deep-forest));display:flex;align-items:center;justify-content:center;font-size:48px;}\n';
+      html += '    .place-content{padding:16px;text-align:left;}\n';
+      html += '    .place-name{font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:6px;}\n';
+      html += '    .place-desc{font-size:14px;color:#666;margin-bottom:16px;}\n';
+      html += '    .map-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;background:var(--muted-gold);color:white;text-decoration:none;border-radius:50px;font-size:14px;font-weight:500;letter-spacing:0.5px;min-height:44px;width:100%;}\n';
+      html += '    .contact-btn{display:flex;align-items:center;gap:14px;padding:18px 20px;min-height:64px;width:100%;max-width:100%;border-radius:16px;border:2px solid rgba(168,195,176,0.3);background:white;cursor:pointer;transition:all 0.2s;margin-bottom:12px;text-decoration:none;}\n';
+      html += '    .contact-btn:active{background:var(--warm-white);transform:scale(0.98);}\n';
+      html += '    .contact-btn-icon{font-size:24px;}\n';
+      html += '    .contact-btn-text{font-size:16px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;}\n';
+      html += '    .contact-btn-sub{font-size:13px;color:#888;font-weight:400;}\n';
+      html += '    .call-btn{background:var(--deep-forest);border-color:var(--deep-forest);}\n';
+      html += '    .call-btn .contact-btn-text{color:white;}\n';
+      html += '    .call-btn .contact-btn-sub{color:rgba(255,255,255,0.7);}\n';
+      html += '    .emergency-btn{background:#dc2626;border-color:#dc2626;}\n';
+      html += '    .emergency-btn .contact-btn-text{color:white;}\n';
+      html += '    .emergency-btn .contact-btn-sub{color:rgba(255,255,255,0.7);}\n';
+      html += '    .review-headline{color:white;font-size:44px;line-height:1.1;}\n';
+      html += '    .stars-row{font-size:48px;letter-spacing:8px;margin:20px 0;}\n';
+      html += '    .review-subtext{font-size:18px;color:var(--soft-sage);max-width:400px;line-height:1.5;}\n';
+      html += '    .review-cta{padding:18px 36px;font-size:18px;font-weight:700;border:none;border-radius:50px;cursor:pointer;background:var(--muted-gold);color:white;min-height:64px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(200,169,106,0.4);}\n';
+      html += '    .footer-brand{font-size:14px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-top:20px;padding-bottom:20px;}\n';
+      html += '    .toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:var(--deep-forest);color:white;padding:16px 32px;border-radius:50px;font-size:16px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.2);z-index:1000;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}\n';
+      html += '    .toast.show{opacity:1;}\n';
+      html += '    .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:100px;background:white;box-shadow:0 -4px 20px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0);}\n';
+      html += '    .nav-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:12px 20px;min-height:70px;justify-content:center;border-radius:16px;transition:background 0.2s;}\n';
+      html += '    .nav-icon{font-size:28px;}\n';
+      html += '    .nav-label{font-size:11px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;text-transform:uppercase;}\n';
+      html += '  </style>\n';
+      html += '</head>\n';
+      html += '<body>\n';
+      html += '  <div class="app-container">\n';
+      html += '    <div class="toast" id="toast"></div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 1: COVER -->\n';
+      html += '    <div class="page page-cover active" id="page-1">\n';
+      html += '      <div class="page-content">\n';
+      html += '        ' + (data.propPhotoData ? '<img src="' + data.propPhotoData + '" style="width:100%;height:200px;object-fit:cover;margin:-80px -20px 20px -20px;">' : '<div style="height:200px;background:linear-gradient(135deg,var(--soft-sage),var(--deep-forest));margin:-80px -20px 20px -20px;"></div>') + '\n';
+      html += '        ' + photoTag + '\n';
+      html += '        <h1>Welcome to<br>' + escapeHtml(data.propName) + '</h1>\n';
+      html += '        <p style="font-size:16px;color:rgba(255,255,255,0.8);margin-top:8px;">' + escapeHtml(data.propAddress) + '</p>\n';
+      html += '        <p class="subtext">Your complete stay guide - everything you need in one place</p>\n';
+      html += '        <div class="host-section">\n';
+      html += '          <p class="host-name">Hosted by ' + escapeHtml(data.hostName) + '</p>\n';
+      html += '          <p class="host-message">"' + escapeHtml(data.hostMessage) + '"</p>\n';
+      html += '        </div>\n';
+      html += '        <button class="cta-btn gold-btn" data-target="page-2">ENTER GUEST GUIDE</button>\n';
+      html += '      </div>\n';
+      html += '      <div class="footer-brand">Powered by LuxeHost Kit</div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 2: MAIN MENU -->\n';
+      html += '    <div class="page light-page" id="page-2">\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Your Stay, Simplified</h2>\n';
+      html += '        <p class="subtext">Tap any icon below</p>\n';
+      html += '        <div class="menu-grid">\n';
+      html += '          <div class="menu-item" data-target="page-3"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128246;</div></div><div class="menu-label">WiFi</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-4"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128273;</div></div><div class="menu-label">Check-In</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-5"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128220;</div></div><div class="menu-label">House Rules</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-6"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#9200;</div></div><div class="menu-label">Check-Out</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-7"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#127860;</div></div><div class="menu-label">Food</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-8"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128506;</div></div><div class="menu-label">Explore</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-9"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128222;</div></div><div class="menu-label">Contacts</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-12"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#128736;</div></div><div class="menu-label">House Guide</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-13"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#127970;</div></div><div class="menu-label">Amenities</div></div>\n';
+      html += '          <div class="menu-item" data-target="page-10"><div class="menu-icon-circle"><div class="menu-icon-emoji">&#11088;</div></div><div class="menu-label">Leave Review</div></div>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 3: WIFI -->\n';
+      html += '    <div class="page light-page" id="page-3">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>WiFi Access</h2>\n';
+      html += '        <div class="card">\n';
+      html += '          <p style="font-size:18px;color:#888;margin-bottom:8px;">Network: <strong>' + escapeHtml(data.wifiName) + '</strong></p>\n';
+      html += '          <p class="wifi-credential">Password: <strong>' + escapeHtml(data.wifiPass) + '</strong></p>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 4: CHECK-IN -->\n';
+      html += '    <div class="page light-page" id="page-4">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Check-In Instructions</h2>\n';
+      html += '        <div class="step-card"><div class="step-number">1</div><div class="step-text">Locate key box at ' + escapeHtml(data.keyLocation) + '</div></div>\n';
+      html += '        <div class="step-card"><div class="step-number">2</div><div class="step-text">Enter code: <strong>' + escapeHtml(data.keyCode) + '</strong></div></div>\n';
+      html += '        <div class="step-card"><div class="step-number">3</div><div class="step-text">Retrieve keys</div></div>\n';
+      html += '        <div class="step-card"><div class="step-number">4</div><div class="step-text">Enjoy your stay</div></div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 5: HOUSE RULES -->\n';
+      html += '    <div class="page light-page" id="page-5">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>House Rules</h2>\n';
+      html += '        <div class="card">\n';
+      html += '          <ul class="checklist">\n';
+      html += '            <li>Smoking: ' + escapeHtml(data.smoking) + '</li>\n';
+      html += '            <li>Quiet Hours: ' + escapeHtml(data.quietHours) + '</li>\n';
+      html += '            <li>Parties: ' + escapeHtml(data.parties) + '</li>\n';
+      html += '            <li>Pets: ' + escapeHtml(data.pets) + '</li>\n';
+      html += '          </ul>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 6: CHECKOUT -->\n';
+      html += '    <div class="page light-page" id="page-6">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Before You Leave</h2>\n';
+      html += '        <div class="card">\n';
+      html += '          <ul class="checklist">\n';
+      html += '            <li>Turn off lights & AC</li>\n';
+      html += '            <li>Dispose trash</li>\n';
+      html += '            <li>Lock doors</li>\n';
+      html += '            <li>Return keys</li>\n';
+      html += '          </ul>\n';
+      html += '          <p style="margin-top:20px;font-size:16px;color:#888;text-align:center;">Checkout time: <strong>' + escapeHtml(data.checkoutTime) + '</strong></p>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 7: FOOD -->\n';
+      html += '    <div class="page light-page" id="page-7">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Eat Like a Local</h2>\n';
+      html += '        <div class="place-card"><div class="place-image">&#9749;</div><div class="place-content"><p class="place-name">Coffee: ' + escapeHtml(data.coffee) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.coffee) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#127822;</div><div class="place-content"><p class="place-name">Breakfast: ' + escapeHtml(data.breakfast) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.breakfast) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#127828;</div><div class="place-content"><p class="place-name">Lunch: ' + escapeHtml(data.lunch) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.lunch) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#127860;</div><div class="place-content"><p class="place-name">Dinner: ' + escapeHtml(data.dinner) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.dinner) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 8: EXPLORE -->\n';
+      html += '    <div class="page light-page" id="page-8">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Explore Nearby</h2>\n';
+      html += '        <div class="place-card"><div class="place-image">&#128205;</div><div class="place-content"><p class="place-name">Tourist Spot: ' + escapeHtml(data.touristSpot) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.touristSpot) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#127918;</div><div class="place-content"><p class="place-name">Activity: ' + escapeHtml(data.activity) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.activity) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#128722;</div><div class="place-content"><p class="place-name">Shopping: ' + escapeHtml(data.shopping) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.shopping) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '        <div class="place-card"><div class="place-image">&#128652;</div><div class="place-content"><p class="place-name">Transport: ' + escapeHtml(data.transport) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.transport) + '" class="map-btn">View on Maps</a></div></div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 9: CONTACTS -->\n';
+      html += '    <div class="page light-page" id="page-9">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Need Help?</h2>\n';
+      html += '        <a href="tel:' + escapeHtml(data.hostPhone) + '" class="contact-btn call-btn">\n';
+      html += '          <span class="contact-btn-icon">&#128222;</span>\n';
+      html += '          <div><div class="contact-btn-text">Host</div><div class="contact-btn-sub">' + escapeHtml(data.hostPhone) + '</div></div>\n';
+      html += '        </a>\n';
+      html += '        <a href="tel:' + escapeHtml(data.emergency) + '" class="contact-btn emergency-btn">\n';
+      html += '          <span class="contact-btn-icon">&#128680;</span>\n';
+      html += '          <div><div class="contact-btn-text">Emergency</div><div class="contact-btn-sub">' + escapeHtml(data.emergency) + '</div></div>\n';
+      html += '        </a>\n';
+      html += '        <a href="tel:' + escapeHtml(data.maintenance) + '" class="contact-btn">\n';
+      html += '          <span class="contact-btn-icon">&#128736;</span>\n';
+      html += '          <div><div class="contact-btn-text">Maintenance</div><div class="contact-btn-sub">' + escapeHtml(data.maintenance) + '</div></div>\n';
+      html += '        </a>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 10: REVIEW -->\n';
+      html += '    <div class="page dark-page" id="page-10">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2 class="review-headline">Loved Your Stay?</h2>\n';
+      html += '        <p class="review-subtext">Your review means everything to us</p>\n';
+      html += '        <div class="stars-row">&#11088;&#11088;&#11088;&#11088;&#11088;</div>\n';
+      html += '        <button class="review-cta" data-target="' + escapeHtml(data.reviewLink) + '">LEAVE A 5-STAR REVIEW</button>\n';
+      html += '        <p style="margin-top:24px;font-size:16px;color:rgba(255,255,255,0.8);text-align:center;">' + escapeHtml(data.thankYouMessage) + '</p>\n';
+      if (data.thankYouPhotoData) {
+        html += '        <div style="text-align:center;margin-top:16px;"><img src="' + data.thankYouPhotoData + '" style="width:90%;max-width:320px;border-radius:12px;"></div>\n';
+      }
+      html += '      </div>\n';
+      html += '      <div class="footer-brand">Powered by LuxeHost Kit</div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 12: HOUSE GUIDE -->\n';
+      html += '    <div class="page light-page" id="page-12">\n';
+      html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>House Guide</h2>\n';
+      html += '        <div class="card">\n';
+      html += '          <ul class="checklist">\n';
+      html += '            <li><strong>AC / Air Conditioning</strong> - ' + escapeHtml(data.acGuide) + '</li>\n';
+      html += '            <li><strong>TV</strong> - ' + escapeHtml(data.tvGuide) + '</li>\n';
+      html += '            <li><strong>Stove / Oven</strong> - ' + escapeHtml(data.stoveGuide) + '</li>\n';
+      html += '            <li><strong>Washing Machine</strong> - ' + escapeHtml(data.washerGuide) + '</li>\n';
+      html += '            <li><strong>WiFi Router</strong> - ' + escapeHtml(data.routerGuide) + '</li>\n';
+      html += '            <li><strong>Water Heater</strong> - ' + escapeHtml(data.heaterGuide) + '</li>\n';
+      html += '          </ul>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- PAGE 13: BUILDING AMENITIES -->\n';
+      html += '    <div class="page light-page" id="page-13">\n';
+      html += '      <button class="back-btn" data-target="page-2">←</button>\n';
+      html += '      <div class="page-content">\n';
+      html += '        <h2>Building Amenities</h2>\n';
+      html += '        <div class="card">\n';
+      if (data.gymPhotoData) {
+        html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.gymPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
+      }
+      html += '          <p style="margin-bottom:12px;">🏋 Gym: ' + escapeHtml(data.gym) + '</p>\n';
+      if (data.poolPhotoData) {
+        html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.poolPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
+      }
+      html += '          <p style="margin-bottom:12px;">🏊 Pool: ' + escapeHtml(data.pool) + '</p>\n';
+      if (data.parkingPhotoData) {
+        html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.parkingPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
+      }
+      html += '          <p style="margin-bottom:12px;">🅿 Parking: ' + escapeHtml(data.parking) + '</p>\n';
+      if (data.securityPhotoData) {
+        html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.securityPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
+      }
+      html += '          <p style="margin-bottom:12px;">🔒 Security: ' + escapeHtml(data.security) + '</p>\n';
+      if (data.otherPhotoData) {
+        html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.otherPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
+      }
+      html += '          <p style="margin-bottom:12px;">✨ Other: ' + escapeHtml(data.otherAmenities) + '</p>\n';
+      html += '        </div>\n';
+      html += '      </div>\n';
+      html += '    </div>\n';
+      html += '\n';
+      html += '    <!-- BOTTOM NAV -->\n';
+      html += '    <div class="bottom-nav">\n';
+      html += '      <div class="nav-item" data-target="page-1"><span class="nav-icon">&#127968;</span><span class="nav-label">Home</span></div>\n';
+      html += '      <div class="nav-item" data-target="page-2"><span class="nav-icon">&#128320;</span><span class="nav-label">Menu</span></div>\n';
+      html += '      <div class="nav-item" data-target="page-9"><span class="nav-icon">&#128222;</span><span class="nav-label">Help</span></div>\n';
+      html += '      <div class="nav-item" data-target="page-10"><span class="nav-icon">&#11088;</span><span class="nav-label">Review</span></div>\n';
+      html += '    </div>\n';
+      html += '  </div>\n';
+      html += '\n';
+      html += '  <script>\n';
+      html += '    function navigateTo(targetId) {\n';
+      html += '      document.querySelectorAll(".page").forEach(function(page) { page.classList.remove("active"); });\n';
+      html += '      var targetPage = document.getElementById(targetId);\n';
+      html += '      if (targetPage) { targetPage.classList.add("active"); window.scrollTo(0,0); }\n';
+      html += '    }\n';
+      html += '    function showToast(message) {\n';
+      html += '      var toast = document.getElementById("toast");\n';
+      html += '      toast.textContent = message;\n';
+      html += '      toast.classList.add("show");\n';
+      html += '      setTimeout(function() { toast.classList.remove("show"); }, 2000);\n';
+      html += '    }\n';
+      html += '    document.addEventListener("click", function(e) {\n';
+      html += '      var target = e.target.closest("[data-target]");\n';
+      html += '      if (!target) return;\n';
+      html += '      var targetId = target.getAttribute("data-target");\n';
+      html += '      if (targetId.startsWith("http")) { window.open(targetId, "_blank"); return; }\n';
+      html += '      navigateTo(targetId);\n';
+      html += '    });\n';
+      html += '  <\/script>\n';
+      html += '</body>\n';
+      html += '</html>';
+
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById('downloadLink');
+      link.href = url;
+      link.download = data.propName.replace(/[^a-z0-9]/gi, '-').toLowerCase() + '-welcome-packet.html';
+      document.getElementById('preview').classList.add('show');
+      document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function init() {
+      initPhotoUpload();
+      const generateBtn = document.getElementById('generateBtn');
+      if (generateBtn) {
+        generateBtn.addEventListener('click', generatePacket);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
