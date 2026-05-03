@@ -581,50 +581,50 @@
     
     function generatePacket() {
       const data = {
-        propName: document.getElementById('propName').value || 'Property Name',
-        propAddress: document.getElementById('propAddress').value || 'Property Address',
-        hostName: document.getElementById('hostName').value || 'Host Name',
-        hostMessage: document.getElementById('hostMessage').value || 'Feel at home.',
+        propName: document.getElementById('propName').value || '',
+        propAddress: document.getElementById('propAddress').value || '',
+        hostName: document.getElementById('hostName').value || '',
+        hostMessage: document.getElementById('hostMessage').value || '',
         photoData: photoData,
         propPhotoData: propPhotoData,
-        gym: document.getElementById('gym').value || 'Gym',
+        gym: document.getElementById('gym').value || '',
         gymPhotoData: gymPhotoData,
-        pool: document.getElementById('pool').value || 'Pool',
+        pool: document.getElementById('pool').value || '',
         poolPhotoData: poolPhotoData,
-        parking: document.getElementById('parking').value || 'Parking',
+        parking: document.getElementById('parking').value || '',
         parkingPhotoData: parkingPhotoData,
-        security: document.getElementById('security').value || 'Security',
+        security: document.getElementById('security').value || '',
         securityPhotoData: securityPhotoData,
-        otherAmenities: document.getElementById('otherAmenities').value || 'Other amenities',
+        otherAmenities: document.getElementById('otherAmenities').value || '',
         otherPhotoData: otherPhotoData,
-        acGuide: document.getElementById('acGuide').value || 'Turn on via remote, set to 22°C',
-        tvGuide: document.getElementById('tvGuide').value || 'Power on, select HDMI 1',
-        stoveGuide: document.getElementById('stoveGuide').value || 'Turn knob to ignite',
-        washerGuide: document.getElementById('washerGuide').value || 'Powder: 1 scoop, Normal mode, 30 mins',
-        routerGuide: document.getElementById('routerGuide').value || 'Restart: unplug 30 sec, plug back in',
-        heaterGuide: document.getElementById('heaterGuide').value || 'Switch on, wait 5 mins for hot water',
-        wifiName: document.getElementById('wifiName').value || 'WiFi Name',
-        wifiPass: document.getElementById('wifiPass').value || 'password',
-        keyLocation: document.getElementById('keyLocation').value || 'Key location',
-        keyCode: document.getElementById('keyCode').value || '1234',
-        checkoutTime: document.getElementById('checkoutTime').value || '11:00 AM',
-        smoking: document.getElementById('smoking').value,
-        quietHours: document.getElementById('quietHours').value,
-        parties: document.getElementById('parties').value,
-        pets: document.getElementById('pets').value,
-        coffee: document.getElementById('coffee').value || 'Coffee shop',
-        breakfast: document.getElementById('breakfast').value || 'Breakfast place',
-        lunch: document.getElementById('lunch').value || 'Lunch place',
-        dinner: document.getElementById('dinner').value || 'Dinner place',
-        touristSpot: document.getElementById('touristSpot').value || 'Tourist Spot',
-        activity: document.getElementById('activity').value || 'Activity',
-        shopping: document.getElementById('shopping').value || 'Shopping',
-        transport: document.getElementById('transport').value || 'Transport',
-        hostPhone: document.getElementById('hostPhone').value || 'Phone',
-        emergency: document.getElementById('emergency').value || '911',
-        maintenance: document.getElementById('maintenance').value || 'Maintenance',
+        acGuide: document.getElementById('acGuide').value || '',
+        tvGuide: document.getElementById('tvGuide').value || '',
+        stoveGuide: document.getElementById('stoveGuide').value || '',
+        washerGuide: document.getElementById('washerGuide').value || '',
+        routerGuide: document.getElementById('routerGuide').value || '',
+        heaterGuide: document.getElementById('heaterGuide').value || '',
+        wifiName: document.getElementById('wifiName').value || '',
+        wifiPass: document.getElementById('wifiPass').value || '',
+        keyLocation: document.getElementById('keyLocation').value || '',
+        keyCode: document.getElementById('keyCode').value || '',
+        checkoutTime: document.getElementById('checkoutTime').value || '',
+        smoking: document.getElementById('smoking').value || '',
+        quietHours: document.getElementById('quietHours').value || '',
+        parties: document.getElementById('parties').value || '',
+        pets: document.getElementById('pets').value || '',
+        coffee: document.getElementById('coffee').value || '',
+        breakfast: document.getElementById('breakfast').value || '',
+        lunch: document.getElementById('lunch').value || '',
+        dinner: document.getElementById('dinner').value || '',
+        touristSpot: document.getElementById('touristSpot').value || '',
+        activity: document.getElementById('activity').value || '',
+        shopping: document.getElementById('shopping').value || '',
+        transport: document.getElementById('transport').value || '',
+        hostPhone: document.getElementById('hostPhone').value || '',
+        emergency: document.getElementById('emergency').value || '',
+        maintenance: document.getElementById('maintenance').value || '',
         reviewLink: document.getElementById('reviewLink').value || 'https://www.airbnb.com',
-        thankYouMessage: document.getElementById('thankYouMessage').value || 'Thank you for staying with us!',
+        thankYouMessage: document.getElementById('thankYouMessage').value || '',
         thankYouPhotoData: thankYouPhotoData
       };
 
@@ -763,10 +763,10 @@
       html += '      <div class="page-content">\n';
       html += '        <h2>WiFi Access</h2>\n';
       html += '        <div class="card">\n';
-      if (data.wifiName && data.wifiName !== 'WiFi Name') {
+      if (data.wifiName) {
         html += '          <p style="font-size:18px;color:#888;margin-bottom:8px;">Network: <strong>' + escapeHtml(data.wifiName) + '</strong></p>\n';
       }
-      if (data.wifiPass && data.wifiPass !== 'password') {
+      if (data.wifiPass) {
         html += '          <p class="wifi-credential">Password: <strong>' + escapeHtml(data.wifiPass) + '</strong></p>\n';
       }
       html += '        </div>\n';
@@ -778,10 +778,10 @@
       html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Check-In Instructions</h2>\n';
-      if (data.keyLocation && data.keyLocation !== 'Key location') {
+      if (data.keyLocation) {
         html += '        <div class="step-card"><div class="step-number">1</div><div class="step-text">Locate key box at ' + escapeHtml(data.keyLocation) + '</div></div>\n';
       }
-      if (data.keyCode && data.keyCode !== '1234') {
+      if (data.keyCode) {
         html += '        <div class="step-card"><div class="step-number">2</div><div class="step-text">Enter code: <strong>' + escapeHtml(data.keyCode) + '</strong></div></div>\n';
       }
       html += '        <div class="step-card"><div class="step-number">3</div><div class="step-text">Retrieve keys</div></div>\n';
@@ -796,16 +796,16 @@
       html += '        <h2>House Rules</h2>\n';
       html += '        <div class="card">\n';
       html += '          <ul class="checklist">\n';
-      if (data.smoking && data.smoking !== 'No smoking') {
+      if (data.smoking) {
         html += '            <li>Smoking: ' + escapeHtml(data.smoking) + '</li>\n';
       }
-      if (data.quietHours && data.quietHours !== '10 PM - 8 AM') {
+      if (data.quietHours) {
         html += '            <li>Quiet Hours: ' + escapeHtml(data.quietHours) + '</li>\n';
       }
-      if (data.parties && data.parties !== 'No parties') {
+      if (data.parties) {
         html += '            <li>Parties: ' + escapeHtml(data.parties) + '</li>\n';
       }
-      if (data.pets && data.pets !== 'No pets') {
+      if (data.pets) {
         html += '            <li>Pets: ' + escapeHtml(data.pets) + '</li>\n';
       }
       html += '          </ul>\n';
@@ -835,10 +835,18 @@
       html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Eat Like a Local</h2>\n';
-      html += '        <div class="place-card"><div class="place-image">&#9749;</div><div class="place-content"><p class="place-name">Coffee: ' + escapeHtml(data.coffee) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.coffee) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#127822;</div><div class="place-content"><p class="place-name">Breakfast: ' + escapeHtml(data.breakfast) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.breakfast) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#127828;</div><div class="place-content"><p class="place-name">Lunch: ' + escapeHtml(data.lunch) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.lunch) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#127860;</div><div class="place-content"><p class="place-name">Dinner: ' + escapeHtml(data.dinner) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.dinner) + '" class="map-btn">View on Maps</a></div></div>\n';
+      if (data.coffee) {
+        html += '        <div class="place-card"><div class="place-image">&#9749;</div><div class="place-content"><p class="place-name">Coffee: ' + escapeHtml(data.coffee) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.coffee) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.breakfast) {
+        html += '        <div class="place-card"><div class="place-image">&#127822;</div><div class="place-content"><p class="place-name">Breakfast: ' + escapeHtml(data.breakfast) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.breakfast) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.lunch) {
+        html += '        <div class="place-card"><div class="place-image">&#127828;</div><div class="place-content"><p class="place-name">Lunch: ' + escapeHtml(data.lunch) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.lunch) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.dinner) {
+        html += '        <div class="place-card"><div class="place-image">&#127860;</div><div class="place-content"><p class="place-name">Dinner: ' + escapeHtml(data.dinner) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.dinner) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
       html += '      </div>\n';
       html += '    </div>\n';
       html += '\n';
@@ -847,10 +855,18 @@
       html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Explore Nearby</h2>\n';
-      html += '        <div class="place-card"><div class="place-image">&#128205;</div><div class="place-content"><p class="place-name">Tourist Spot: ' + escapeHtml(data.touristSpot) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.touristSpot) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#127918;</div><div class="place-content"><p class="place-name">Activity: ' + escapeHtml(data.activity) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.activity) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#128722;</div><div class="place-content"><p class="place-name">Shopping: ' + escapeHtml(data.shopping) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.shopping) + '" class="map-btn">View on Maps</a></div></div>\n';
-      html += '        <div class="place-card"><div class="place-image">&#128652;</div><div class="place-content"><p class="place-name">Transport: ' + escapeHtml(data.transport) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.transport) + '" class="map-btn">View on Maps</a></div></div>\n';
+      if (data.touristSpot) {
+        html += '        <div class="place-card"><div class="place-image">&#128205;</div><div class="place-content"><p class="place-name">Tourist Spot: ' + escapeHtml(data.touristSpot) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.touristSpot) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.activity) {
+        html += '        <div class="place-card"><div class="place-image">&#127918;</div><div class="place-content"><p class="place-name">Activity: ' + escapeHtml(data.activity) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.activity) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.shopping) {
+        html += '        <div class="place-card"><div class="place-image">&#128722;</div><div class="place-content"><p class="place-name">Shopping: ' + escapeHtml(data.shopping) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.shopping) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
+      if (data.transport) {
+        html += '        <div class="place-card"><div class="place-image">&#128652;</div><div class="place-content"><p class="place-name">Transport: ' + escapeHtml(data.transport) + '</p><a href="https://maps.google.com/?q=' + encodeURIComponent(data.transport) + '" class="map-btn">View on Maps</a></div></div>\n';
+      }
       html += '      </div>\n';
       html += '    </div>\n';
       html += '\n';
@@ -903,12 +919,24 @@
       html += '        <h2>House Guide</h2>\n';
       html += '        <div class="card">\n';
       html += '          <ul class="checklist">\n';
-      html += '            <li><strong>AC / Air Conditioning</strong> - ' + escapeHtml(data.acGuide) + '</li>\n';
-      html += '            <li><strong>TV</strong> - ' + escapeHtml(data.tvGuide) + '</li>\n';
-      html += '            <li><strong>Stove / Oven</strong> - ' + escapeHtml(data.stoveGuide) + '</li>\n';
-      html += '            <li><strong>Washing Machine</strong> - ' + escapeHtml(data.washerGuide) + '</li>\n';
-      html += '            <li><strong>WiFi Router</strong> - ' + escapeHtml(data.routerGuide) + '</li>\n';
-      html += '            <li><strong>Water Heater</strong> - ' + escapeHtml(data.heaterGuide) + '</li>\n';
+      if (data.acGuide) {
+        html += '            <li><strong>AC / Air Conditioning</strong> - ' + escapeHtml(data.acGuide) + '</li>\n';
+      }
+      if (data.tvGuide) {
+        html += '            <li><strong>TV</strong> - ' + escapeHtml(data.tvGuide) + '</li>\n';
+      }
+      if (data.stoveGuide) {
+        html += '            <li><strong>Stove / Oven</strong> - ' + escapeHtml(data.stoveGuide) + '</li>\n';
+      }
+      if (data.washerGuide) {
+        html += '            <li><strong>Washing Machine</strong> - ' + escapeHtml(data.washerGuide) + '</li>\n';
+      }
+      if (data.routerGuide) {
+        html += '            <li><strong>WiFi Router</strong> - ' + escapeHtml(data.routerGuide) + '</li>\n';
+      }
+      if (data.heaterGuide) {
+        html += '            <li><strong>Water Heater</strong> - ' + escapeHtml(data.heaterGuide) + '</li>\n';
+      }
       html += '          </ul>\n';
       html += '        </div>\n';
       html += '      </div>\n';
