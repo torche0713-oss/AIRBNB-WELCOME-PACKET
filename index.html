@@ -178,6 +178,53 @@
       padding: 8px 0;
       border-bottom: 1px solid #eee;
     }
+    .purchase-popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      padding: 15px;
+      z-index: 1000;
+      max-width: 320px;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(400px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .popup-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .popup-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #C8A96A;
+      color: #0F2F2A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .popup-text {
+      color: #333;
+      font-size: 14px;
+    }
+    .popup-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .popup-location {
+      font-size: 12px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -332,5 +379,68 @@
       <p style="margin-top: 8px;">Powered by Deep Forest Green & Muted Gold</p>
     </div>
   </div>
+
+  <div class="purchase-popup" id="purchasePopup">
+    <div class="popup-content">
+      <div class="popup-avatar" id="popupAvatar"></div>
+      <div class="popup-text">
+        <div class="popup-name" id="popupName"></div>
+        <div class="popup-location" id="popupLocation"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const names = [
+      { name: "Kenneth M.", loc: "Manila" },
+      { name: "Renz D.", loc: "Quezon City" },
+      { name: "Vince T.", loc: "Makati" },
+      { name: "Bryce A.", loc: "BGC, Taguig" },
+      { name: "Jared S.", loc: "Pasig" },
+      { name: "Jasper K.", loc: "Ortigas" },
+      { name: "Axel M.", loc: "Muntinlupa" },
+      { name: "Devon R.", loc: "Taguig" },
+      { name: "Sean D.", loc: "Mandaluyong" },
+      { name: "Prince J.", loc: "Las Piñas" },
+      { name: "Karl B.", loc: "Marikina" },
+      { name: "Neil C.", loc: "Caloocan" },
+      { name: "Russel T.", loc: "Navotas" },
+      { name: "Alden M.", loc: "Davao City" },
+      { name: "Rommel F.", loc: "Cagayan de Oro" },
+      { name: "Greg S.", loc: "Iloilo City" },
+      { name: "Nico R.", loc: "Bacolod City" },
+      { name: "Jerome T.", loc: "Dumaguete" },
+      { name: "Wesley L.", loc: "Dagupan" },
+      { name: "Andy K.", loc: "Santa Rosa" },
+      { name: "Jomari B.", loc: "Lipa City" },
+      { name: "Kian C.", loc: "Imus" },
+      { name: "Mark D.", loc: "Cabanatuan" },
+      { name: "Riley A.", loc: "General Santos" },
+      { name: "Chester R.", loc: "Zamboanga" },
+      { name: "Dexter L.", loc: "Butuan" },
+      { name: "Francis K.", loc: "Tacloban City" },
+      { name: "Ivan M.", loc: "Puerto Princesa" }
+    ];
+
+    function showPopup() {
+      var popup = document.getElementById('purchasePopup');
+      if (!popup) return;
+
+      var randomPerson = names[Math.floor(Math.random() * names.length)];
+
+      document.getElementById('popupName').textContent = randomPerson.name + ' just purchased LuxeHost Kit!';
+      document.getElementById('popupAvatar').textContent = randomPerson.name.charAt(0);
+      document.getElementById('popupLocation').textContent = '📍 ' + randomPerson.loc;
+
+      popup.style.display = 'flex';
+
+      setTimeout(function() {
+        popup.style.display = 'none';
+      }, 6000);
+    }
+
+    setTimeout(showPopup, 2000);
+    setInterval(showPopup, 12000);
+  </script>
 </body>
 </html>
