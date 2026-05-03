@@ -762,8 +762,12 @@
       html += '      <div class="page-content">\n';
       html += '        <h2>WiFi Access</h2>\n';
       html += '        <div class="card">\n';
-      html += '          <p style="font-size:18px;color:#888;margin-bottom:8px;">Network: <strong>' + escapeHtml(data.wifiName) + '</strong></p>\n';
-      html += '          <p class="wifi-credential">Password: <strong>' + escapeHtml(data.wifiPass) + '</strong></p>\n';
+      if (data.wifiName && data.wifiName !== 'WiFi Name') {
+        html += '          <p style="font-size:18px;color:#888;margin-bottom:8px;">Network: <strong>' + escapeHtml(data.wifiName) + '</strong></p>\n';
+      }
+      if (data.wifiPass && data.wifiPass !== 'password') {
+        html += '          <p class="wifi-credential">Password: <strong>' + escapeHtml(data.wifiPass) + '</strong></p>\n';
+      }
       html += '        </div>\n';
       html += '      </div>\n';
       html += '    </div>\n';
@@ -773,8 +777,12 @@
       html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Check-In Instructions</h2>\n';
-      html += '        <div class="step-card"><div class="step-number">1</div><div class="step-text">Locate key box at ' + escapeHtml(data.keyLocation) + '</div></div>\n';
-      html += '        <div class="step-card"><div class="step-number">2</div><div class="step-text">Enter code: <strong>' + escapeHtml(data.keyCode) + '</strong></div></div>\n';
+      if (data.keyLocation && data.keyLocation !== 'Key location') {
+        html += '        <div class="step-card"><div class="step-number">1</div><div class="step-text">Locate key box at ' + escapeHtml(data.keyLocation) + '</div></div>\n';
+      }
+      if (data.keyCode && data.keyCode !== '1234') {
+        html += '        <div class="step-card"><div class="step-number">2</div><div class="step-text">Enter code: <strong>' + escapeHtml(data.keyCode) + '</strong></div></div>\n';
+      }
       html += '        <div class="step-card"><div class="step-number">3</div><div class="step-text">Retrieve keys</div></div>\n';
       html += '        <div class="step-card"><div class="step-number">4</div><div class="step-text">Enjoy your stay</div></div>\n';
       html += '      </div>\n';
@@ -787,10 +795,18 @@
       html += '        <h2>House Rules</h2>\n';
       html += '        <div class="card">\n';
       html += '          <ul class="checklist">\n';
-      html += '            <li>Smoking: ' + escapeHtml(data.smoking) + '</li>\n';
-      html += '            <li>Quiet Hours: ' + escapeHtml(data.quietHours) + '</li>\n';
-      html += '            <li>Parties: ' + escapeHtml(data.parties) + '</li>\n';
-      html += '            <li>Pets: ' + escapeHtml(data.pets) + '</li>\n';
+      if (data.smoking && data.smoking !== 'No smoking') {
+        html += '            <li>Smoking: ' + escapeHtml(data.smoking) + '</li>\n';
+      }
+      if (data.quietHours && data.quietHours !== '10 PM - 8 AM') {
+        html += '            <li>Quiet Hours: ' + escapeHtml(data.quietHours) + '</li>\n';
+      }
+      if (data.parties && data.parties !== 'No parties') {
+        html += '            <li>Parties: ' + escapeHtml(data.parties) + '</li>\n';
+      }
+      if (data.pets && data.pets !== 'No pets') {
+        html += '            <li>Pets: ' + escapeHtml(data.pets) + '</li>\n';
+      }
       html += '          </ul>\n';
       html += '        </div>\n';
       html += '      </div>\n';
@@ -842,18 +858,24 @@
       html += '      <button class="back-btn" data-target="page-2">&#8592;</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Need Help?</h2>\n';
-      html += '        <a href="tel:' + escapeHtml(data.hostPhone) + '" class="contact-btn call-btn">\n';
-      html += '          <span class="contact-btn-icon">&#128222;</span>\n';
-      html += '          <div><div class="contact-btn-text">Host</div><div class="contact-btn-sub">' + escapeHtml(data.hostPhone) + '</div></div>\n';
-      html += '        </a>\n';
-      html += '        <a href="tel:' + escapeHtml(data.emergency) + '" class="contact-btn emergency-btn">\n';
-      html += '          <span class="contact-btn-icon">&#128680;</span>\n';
-      html += '          <div><div class="contact-btn-text">Emergency</div><div class="contact-btn-sub">' + escapeHtml(data.emergency) + '</div></div>\n';
-      html += '        </a>\n';
-      html += '        <a href="tel:' + escapeHtml(data.maintenance) + '" class="contact-btn">\n';
-      html += '          <span class="contact-btn-icon">&#128736;</span>\n';
-      html += '          <div><div class="contact-btn-text">Maintenance</div><div class="contact-btn-sub">' + escapeHtml(data.maintenance) + '</div></div>\n';
-      html += '        </a>\n';
+      if (data.hostPhone && data.hostPhone !== 'Phone') {
+        html += '        <a href="tel:' + escapeHtml(data.hostPhone) + '" class="contact-btn call-btn">\n';
+        html += '          <span class="contact-btn-icon">&#128222;</span>\n';
+        html += '          <div><div class="contact-btn-text">Host</div><div class="contact-btn-sub">' + escapeHtml(data.hostPhone) + '</div></div>\n';
+        html += '        </a>\n';
+      }
+      if (data.emergency && data.emergency !== '911') {
+        html += '        <a href="tel:' + escapeHtml(data.emergency) + '" class="contact-btn emergency-btn">\n';
+        html += '          <span class="contact-btn-icon">&#128680;</span>\n';
+        html += '          <div><div class="contact-btn-text">Emergency</div><div class="contact-btn-sub">' + escapeHtml(data.emergency) + '</div></div>\n';
+        html += '        </a>\n';
+      }
+      if (data.maintenance && data.maintenance !== 'Maintenance') {
+        html += '        <a href="tel:' + escapeHtml(data.maintenance) + '" class="contact-btn">\n';
+        html += '          <span class="contact-btn-icon">&#128736;</span>\n';
+        html += '          <div><div class="contact-btn-text">Maintenance</div><div class="contact-btn-sub">' + escapeHtml(data.maintenance) + '</div></div>\n';
+        html += '        </a>\n';
+      }
       html += '      </div>\n';
       html += '    </div>\n';
       html += '\n';
