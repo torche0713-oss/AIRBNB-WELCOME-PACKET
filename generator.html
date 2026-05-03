@@ -263,6 +263,12 @@
       <input type="file" id="thankYouPhotoInput" accept="image/*" style="display:none;">
     </div>
 
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0;">
+      <button class="generate-btn" onclick="saveProject()" style="margin: 0;">Save Project</button>
+      <button class="generate-btn" onclick="loadProject()" style="margin: 0; background: #2E8B57;">Load Project</button>
+      <input type="file" id="loadProjectInput" accept=".json" style="display: none;">
+    </div>
+
     <button class="generate-btn" id="generateBtn">Generate Welcome Packet</button>
 
     <div class="preview" id="preview">
@@ -969,6 +975,179 @@
     } else {
       init();
     }
+
+    function saveProject() {
+      const projectData = {
+        propName: document.getElementById('propName').value,
+        propAddress: document.getElementById('propAddress').value,
+        hostName: document.getElementById('hostName').value,
+        hostMessage: document.getElementById('hostMessage').value,
+        photoData: photoData,
+        propPhotoData: propPhotoData,
+        gym: document.getElementById('gym').value,
+        gymPhotoData: gymPhotoData,
+        pool: document.getElementById('pool').value,
+        poolPhotoData: poolPhotoData,
+        parking: document.getElementById('parking').value,
+        parkingPhotoData: parkingPhotoData,
+        security: document.getElementById('security').value,
+        securityPhotoData: securityPhotoData,
+        otherAmenities: document.getElementById('otherAmenities').value,
+        otherPhotoData: otherPhotoData,
+        wifiName: document.getElementById('wifiName').value,
+        wifiPass: document.getElementById('wifiPass').value,
+        keyLocation: document.getElementById('keyLocation').value,
+        keyCode: document.getElementById('keyCode').value,
+        checkoutTime: document.getElementById('checkoutTime').value,
+        smoking: document.getElementById('smoking').value,
+        quietHours: document.getElementById('quietHours').value,
+        parties: document.getElementById('parties').value,
+        pets: document.getElementById('pets').value,
+        coffee: document.getElementById('coffee').value,
+        breakfast: document.getElementById('breakfast').value,
+        lunch: document.getElementById('lunch').value,
+        dinner: document.getElementById('dinner').value,
+        touristSpot: document.getElementById('touristSpot').value,
+        activity: document.getElementById('activity').value,
+        shopping: document.getElementById('shopping').value,
+        transport: document.getElementById('transport').value,
+        acGuide: document.getElementById('acGuide').value,
+        tvGuide: document.getElementById('tvGuide').value,
+        stoveGuide: document.getElementById('stoveGuide').value,
+        washerGuide: document.getElementById('washerGuide').value,
+        routerGuide: document.getElementById('routerGuide').value,
+        heaterGuide: document.getElementById('heaterGuide').value,
+        hostPhone: document.getElementById('hostPhone').value,
+        emergency: document.getElementById('emergency').value,
+        maintenance: document.getElementById('maintenance').value,
+        reviewLink: document.getElementById('reviewLink').value,
+        thankYouMessage: document.getElementById('thankYouMessage').value,
+        thankYouPhotoData: thankYouPhotoData
+      };
+
+      const json = JSON.stringify(projectData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = (projectData.propName || 'welcome-packet') + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      alert('Project saved! File: ' + a.download);
+    }
+
+    function loadProject() {
+      document.getElementById('loadProjectInput').click();
+    }
+
+    document.getElementById('loadProjectInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const projectData = JSON.parse(e.target.result);
+
+          if (projectData.propName) document.getElementById('propName').value = projectData.propName;
+          if (projectData.propAddress) document.getElementById('propAddress').value = projectData.propAddress;
+          if (projectData.hostName) document.getElementById('hostName').value = projectData.hostName;
+          if (projectData.hostMessage) document.getElementById('hostMessage').value = projectData.hostMessage;
+
+          if (projectData.photoData) {
+            photoData = projectData.photoData;
+            document.getElementById('hostPhoto').src = photoData;
+            document.getElementById('photoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.propPhotoData) {
+            propPhotoData = projectData.propPhotoData;
+            document.getElementById('propImage').src = propPhotoData;
+            document.getElementById('propPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.gym) document.getElementById('gym').value = projectData.gym;
+          if (projectData.gymPhotoData) {
+            gymPhotoData = projectData.gymPhotoData;
+            document.getElementById('gymImage').src = gymPhotoData;
+            document.getElementById('gymPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.pool) document.getElementById('pool').value = projectData.pool;
+          if (projectData.poolPhotoData) {
+            poolPhotoData = projectData.poolPhotoData;
+            document.getElementById('poolImage').src = poolPhotoData;
+            document.getElementById('poolPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.parking) document.getElementById('parking').value = projectData.parking;
+          if (projectData.parkingPhotoData) {
+            parkingPhotoData = projectData.parkingPhotoData;
+            document.getElementById('parkingImage').src = parkingPhotoData;
+            document.getElementById('parkingPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.security) document.getElementById('security').value = projectData.security;
+          if (projectData.securityPhotoData) {
+            securityPhotoData = projectData.securityPhotoData;
+            document.getElementById('securityImage').src = securityPhotoData;
+            document.getElementById('securityPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.otherAmenities) document.getElementById('otherAmenities').value = projectData.otherAmenities;
+          if (projectData.otherPhotoData) {
+            otherPhotoData = projectData.otherPhotoData;
+            document.getElementById('otherImage').src = otherPhotoData;
+            document.getElementById('otherPhotoUpload').classList.add('has-photo');
+          }
+
+          if (projectData.wifiName) document.getElementById('wifiName').value = projectData.wifiName;
+          if (projectData.wifiPass) document.getElementById('wifiPass').value = projectData.wifiPass;
+          if (projectData.keyLocation) document.getElementById('keyLocation').value = projectData.keyLocation;
+          if (projectData.keyCode) document.getElementById('keyCode').value = projectData.keyCode;
+          if (projectData.checkoutTime) document.getElementById('checkoutTime').value = projectData.checkoutTime;
+          if (projectData.smoking) document.getElementById('smoking').value = projectData.smoking;
+          if (projectData.quietHours) document.getElementById('quietHours').value = projectData.quietHours;
+          if (projectData.parties) document.getElementById('parties').value = projectData.parties;
+          if (projectData.pets) document.getElementById('pets').value = projectData.pets;
+
+          if (projectData.coffee) document.getElementById('coffee').value = projectData.coffee;
+          if (projectData.breakfast) document.getElementById('breakfast').value = projectData.breakfast;
+          if (projectData.lunch) document.getElementById('lunch').value = projectData.lunch;
+          if (projectData.dinner) document.getElementById('dinner').value = projectData.dinner;
+
+          if (projectData.touristSpot) document.getElementById('touristSpot').value = projectData.touristSpot;
+          if (projectData.activity) document.getElementById('activity').value = projectData.activity;
+          if (projectData.shopping) document.getElementById('shopping').value = projectData.shopping;
+          if (projectData.transport) document.getElementById('transport').value = projectData.transport;
+
+          if (projectData.acGuide) document.getElementById('acGuide').value = projectData.acGuide;
+          if (projectData.tvGuide) document.getElementById('tvGuide').value = projectData.tvGuide;
+          if (projectData.stoveGuide) document.getElementById('stoveGuide').value = projectData.stoveGuide;
+          if (projectData.washerGuide) document.getElementById('washerGuide').value = projectData.washerGuide;
+          if (projectData.routerGuide) document.getElementById('routerGuide').value = projectData.routerGuide;
+          if (projectData.heaterGuide) document.getElementById('heaterGuide').value = projectData.heaterGuide;
+
+          if (projectData.hostPhone) document.getElementById('hostPhone').value = projectData.hostPhone;
+          if (projectData.emergency) document.getElementById('emergency').value = projectData.emergency;
+          if (projectData.maintenance) document.getElementById('maintenance').value = projectData.maintenance;
+
+          if (projectData.reviewLink) document.getElementById('reviewLink').value = projectData.reviewLink;
+          if (projectData.thankYouMessage) document.getElementById('thankYouMessage').value = projectData.thankYouMessage;
+          if (projectData.thankYouPhotoData) {
+            thankYouPhotoData = projectData.thankYouPhotoData;
+            document.getElementById('thankYouImage').src = thankYouPhotoData;
+            document.getElementById('thankYouPhotoUpload').classList.add('has-photo');
+          }
+
+          alert('Project loaded successfully!');
+        } catch (err) {
+          alert('Error loading project: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
   </script>
 </body>
 </html>
