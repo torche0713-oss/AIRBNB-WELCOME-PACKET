@@ -4,12 +4,186 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Packet Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #0F2F2A; min-height: 100vh; padding: 20px; }
+
+    /* ===== COVER STYLES ===== */
+    .cover-section {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .cover-section.hidden { display: none; }
+    .cover-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: #C8A96A;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(200,169,106,0.2);
+      color: #C8A96A;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(200,169,106,0.3);
+    }
+    .cover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #ffffff;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .cover-title span { color: #C8A96A; }
+    .cover-tagline {
+      font-size: 18px;
+      color: #A8C3B0;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .cover-mockup {
+      width: 280px;
+      background: #ffffff;
+      border-radius: 24px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .cover-mockup-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+    .cover-mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .cover-mockup-dot.red { background: #FF5F56; }
+    .cover-mockup-dot.yellow { background: #FFBD2E; }
+    .cover-mockup-dot.green { background: #27C93F; }
+    .cover-mockup-img {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, #0F2F2A 0%, #1a5a50 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 48px;
+    }
+    .cover-mockup-line {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .cover-mockup-line.short { width: 60%; }
+    .cover-mockup-line.medium { width: 80%; }
+    .cover-mockup-icons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .cover-mockup-icon {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-size: 20px;
+    }
+    .cover-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .cover-feature {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .cover-feature-icon { font-size: 28px; margin-bottom: 8px; }
+    .cover-feature-label { font-size: 11px; color: #A8C3B0; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cover-btn {
+      display: inline-block;
+      padding: 20px 48px;
+      background: #C8A96A;
+      color: #0F2F2A;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(200,169,106,0.4);
+      width: 100%;
+      max-width: 400px;
+      border: none;
+      cursor: pointer;
+    }
+    .cover-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(200,169,106,0.5);
+    }
+    .cover-btn-sub {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #A8C3B0;
+    }
+    .cover-footer {
+      margin-top: 60px;
+      margin-bottom: 40px;
+      color: rgba(255,255,255,0.3);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* ===== GENERATOR STYLES ===== */
+    .generator-section {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .generator-section.hidden { display: none; }
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 2px solid rgba(200,169,106,0.3);
+      color: #C8A96A;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .back-home-btn:hover {
+      background: rgba(200,169,106,0.1);
+      border-color: #C8A96A;
+    }
     .container { max-width: 600px; margin: 0 auto; }
     .header { text-align: center; color: white; margin-bottom: 30px; padding: 20px; }
-    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header h1 { font-size: 52px; margin-bottom: 12px; }
     .header p { color: #A8C3B0; font-size: 14px; }
     .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
     .card h2 { font-size: 18px; color: #0F2F2A; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #A8C3B0; }
@@ -40,11 +214,59 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Welcome Packet Generator</h1>
-      <p>Create a custom mobile guide for your guests</p>
+  <div class="cover-section" id="coverSection">
+    <div class="cover-logo">LuxeHost Kit</div>
+    <div class="cover-badge">Welcome Packet Generator</div>
+    <h1 class="cover-title">Turn Every Guest Into a<br><span>5-Star Review</span></h1>
+    <p class="cover-tagline">Create a beautiful, mobile-friendly welcome guide for your Airbnb guests in minutes</p>
+    <div class="cover-mockup">
+      <div class="cover-mockup-bar">
+        <div class="cover-mockup-dot red"></div>
+        <div class="cover-mockup-dot yellow"></div>
+        <div class="cover-mockup-dot green"></div>
+      </div>
+      <div class="cover-mockup-img">🏠</div>
+      <div class="cover-mockup-line short"></div>
+      <div class="cover-mockup-line"></div>
+      <div class="cover-mockup-line medium"></div>
+      <div class="cover-mockup-icons">
+        <div class="cover-mockup-icon">📶</div>
+        <div class="cover-mockup-icon">🍽</div>
+        <div class="cover-mockup-icon">📞</div>
+      </div>
     </div>
+    <div class="cover-features">
+      <div class="cover-feature">
+        <div class="cover-feature-icon">📱</div>
+        <div class="cover-feature-label">Mobile Optimized</div>
+      </div>
+      <div class="cover-feature">
+        <div class="cover-feature-icon">🖼</div>
+        <div class="cover-feature-label">Photo Uploads</div>
+      </div>
+      <div class="cover-feature">
+        <div class="cover-feature-icon">💾</div>
+        <div class="cover-feature-label">Save & Load</div>
+      </div>
+      <div class="cover-feature">
+        <div class="cover-feature-icon">🔗</div>
+        <div class="cover-feature-label">Maps Links</div>
+      </div>
+    </div>
+    <button class="cover-btn" onclick="showGenerator()">Start Creating</button>
+    <span class="cover-btn-sub">Takes 10 minutes • No account needed</span>
+    <div class="cover-footer">
+      <p>LuxeHost Kit &mdash; Welcome Packets That Wow</p>
+    </div>
+  </div>
+
+  <div class="generator-section hidden" id="generatorSection">
+    <div class="container">
+      <button class="back-home-btn" onclick="showCover()">← Back to Home</button>
+      <div class="header">
+        <h1>Welcome Packet Generator</h1>
+        <p>Create a custom mobile guide for your guests</p>
+      </div>
 
     <div class="card">
       <h2>Property Info</h2>
@@ -280,9 +502,22 @@
 
     <div class="footer">Powered by LuxeHost Kit</div>
   </div>
+</div>
 
   <script>
     'use strict';
+
+    function showCover() {
+      document.getElementById('coverSection').classList.remove('hidden');
+      document.getElementById('generatorSection').classList.add('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function showGenerator() {
+      document.getElementById('coverSection').classList.add('hidden');
+      document.getElementById('generatorSection').classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
     
     let photoData = '';
     let propPhotoData = '';
