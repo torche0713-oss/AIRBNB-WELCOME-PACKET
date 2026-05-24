@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Packet Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at center, #2A5A50 0%, #1a5a50 30%, #0F2F2A 60%, #081F1B 100%); min-height: 100vh; padding: 20px; }
@@ -18,9 +19,14 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      text-align: center;
-      padding: 20px;
-      animation: fadeIn 0.8s ease;
+    }
+
+    #three-container {
+      width: 100%;
+      max-width: 360px;
+      height: 320px;
+      margin: 16px auto;
+      pointer-events: none;
     }
     .cover-section.hidden { display: none; }
     .cover-logo {
@@ -351,42 +357,27 @@
     <div class="cover-badge">Welcome Packet Generator</div>
     <h1 class="cover-title">Turn Every Guest Into a<br><span>5-Star Review</span></h1>
     <p class="cover-tagline">Create a beautiful, mobile-friendly welcome guide for your Airbnb guests in minutes</p>
-    <div class="cover-mockup">
-      <div class="cover-mockup-bar">
-        <div class="cover-mockup-dot red"></div>
-        <div class="cover-mockup-dot yellow"></div>
-        <div class="cover-mockup-dot green"></div>
-      </div>
-      <div class="cover-mockup-img">🏠</div>
-      <div class="cover-mockup-line short"></div>
-      <div class="cover-mockup-line"></div>
-      <div class="cover-mockup-line medium"></div>
-      <div class="cover-mockup-icons">
-        <div class="cover-mockup-icon">📶</div>
-        <div class="cover-mockup-icon">🍽</div>
-        <div class="cover-mockup-icon">📞</div>
-      </div>
-    </div>
+    <div id="three-container"></div>
     <div class="cover-features">
       <div class="cover-feature">
-        <div class="cover-feature-icon">📱</div>
+        <div class="cover-feature-icon">&#x1F4F1;</div>
         <div class="cover-feature-label">Mobile Optimized</div>
       </div>
       <div class="cover-feature">
-        <div class="cover-feature-icon">🖼</div>
+        <div class="cover-feature-icon">&#x1F5BC;</div>
         <div class="cover-feature-label">Photo Uploads</div>
       </div>
       <div class="cover-feature">
-        <div class="cover-feature-icon">💾</div>
+        <div class="cover-feature-icon">&#x1F4BE;</div>
         <div class="cover-feature-label">Save & Load</div>
       </div>
       <div class="cover-feature">
-        <div class="cover-feature-icon">🔗</div>
+        <div class="cover-feature-icon">&#x1F517;</div>
         <div class="cover-feature-label">Maps Links</div>
       </div>
     </div>
-    <button class="cover-btn" onclick="showGenerator()">Start Creating</button>
-    <span class="cover-btn-sub">Takes 10 minutes • No account needed</span>
+    <button class="cover-btn" id="startBtn" onclick="showGenerator()">Start Creating</button>
+    <span class="cover-btn-sub">Takes 10 minutes &#x2022; No account needed</span>
     <div class="cover-footer">
       <p>LuxeHost Kit &mdash; Welcome Packets That Wow</p>
     </div>
@@ -394,7 +385,7 @@
 
   <div class="generator-section hidden" id="generatorSection">
     <div class="container">
-      <button class="back-home-btn" onclick="showCover()">← Back to Home</button>
+      <button class="back-home-btn" onclick="showCover()">&#x2190; Back to Home</button>
       <div class="header">
         <h1>Welcome Packet Generator</h1>
         <p>Create a custom mobile guide for your guests</p>
@@ -417,7 +408,7 @@
       <label>Property Photo</label>
       <div class="photo-upload" id="propPhotoUpload">
         <div class="placeholder">
-          <span>🏠</span>
+          <span>&#x1F3E0;</span>
           <small>Property photo</small>
         </div>
         <img id="propImage" src="" alt="Property">
@@ -517,7 +508,7 @@
       <h2>House Guide</h2>
       <p style="color: #A8C3B0; font-size: 13px; margin-bottom: 12px;">Add instructions for common appliances</p>
       <label>AC / Air Conditioning</label>
-      <input type="text" id="acGuide" placeholder="Turn on via remote, set to 22°C">
+      <input type="text" id="acGuide" placeholder="Turn on via remote, set to 22&#xB0;C">
       <label>TV</label>
       <input type="text" id="tvGuide" placeholder="Power on, select HDMI 1">
       <label>Stove / Oven</label>
@@ -539,7 +530,7 @@
       <input type="text" id="gym" placeholder="Located on 2nd floor">
       <div class="photo-upload" id="gymPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
         <div class="placeholder" style="font-size:12px;">
-          <span style="font-size:24px;">🏋</span>
+          <span style="font-size:24px;">&#x1F3CB;</span>
           <small>Gym photo</small>
         </div>
         <img id="gymImage" src="" alt="Gym" style="width:100%;height:100%;object-fit:cover;">
@@ -550,7 +541,7 @@
       <input type="text" id="pool" placeholder="Open 6AM-10PM">
       <div class="photo-upload" id="poolPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
         <div class="placeholder" style="font-size:12px;">
-          <span style="font-size:24px;">🏊</span>
+          <span style="font-size:24px;">&#x1F3CA;</span>
           <small>Pool photo</small>
         </div>
         <img id="poolImage" src="" alt="Pool" style="width:100%;height:100%;object-fit:cover;">
@@ -561,7 +552,7 @@
       <input type="text" id="parking" placeholder="Basement Level B1">
       <div class="photo-upload" id="parkingPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
         <div class="placeholder" style="font-size:12px;">
-          <span style="font-size:24px;">🅿</span>
+          <span style="font-size:24px;">&#x1F17F;</span>
           <small>Parking photo</small>
         </div>
         <img id="parkingImage" src="" alt="Parking" style="width:100%;height:100%;object-fit:cover;">
@@ -572,7 +563,7 @@
       <input type="text" id="security" placeholder="24/7 Security">
       <div class="photo-upload" id="securityPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
         <div class="placeholder" style="font-size:12px;">
-          <span style="font-size:24px;">🔒</span>
+          <span style="font-size:24px;">&#x1F512;</span>
           <small>Security photo</small>
         </div>
         <img id="securityImage" src="" alt="Security" style="width:100%;height:100%;object-fit:cover;">
@@ -583,7 +574,7 @@
       <textarea id="otherAmenities" placeholder="Lobby, Elevator, etc."></textarea>
       <div class="photo-upload" id="otherPhotoUpload" style="width:80px;height:80px;margin:0 auto 12px;">
         <div class="placeholder" style="font-size:12px;">
-          <span style="font-size:24px;">✨</span>
+          <span style="font-size:24px;">&#x2728;</span>
           <small>Other photo</small>
         </div>
         <img id="otherImage" src="" alt="Other" style="width:100%;height:100%;object-fit:cover;">
@@ -642,7 +633,6 @@
 
   <script>
     'use strict';
-
     function showCover() {
       document.getElementById('coverSection').classList.remove('hidden');
       document.getElementById('generatorSection').classList.add('hidden');
@@ -654,7 +644,8 @@
       document.getElementById('generatorSection').classList.remove('hidden');
       window.scrollTo(0, 0);
     }
-    
+    document.getElementById('startBtn').onclick = showGenerator;
+
     let photoData = '';
     let propPhotoData = '';
     let gymPhotoData = '';
@@ -663,9 +654,276 @@
     let securityPhotoData = '';
     let otherPhotoData = '';
     let thankYouPhotoData = '';
-    
+
+    // === 3D Room Walkthrough ===
+    let scene, camera, renderer, room, particles = [], clock = new THREE.Clock();
+
+    function createWoodTexture() {
+      const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#c4956a'; ctx.fillRect(0, 0, 256, 256);
+      for (let i = 0; i < 8; i++) {
+        const y = i * 32;
+        ctx.fillStyle = `rgba(0,0,0,${0.04 + Math.random() * 0.06})`;
+        ctx.fillRect(0, y, 256, 30);
+        for (let j = 0; j < 30; j++) {
+          const gx = Math.random() * 256, gy = y + Math.random() * 28;
+          ctx.strokeStyle = `rgba(0,0,0,${0.03 + Math.random() * 0.05})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(gx, gy);
+          ctx.bezierCurveTo(gx + 15, gy - 1 + Math.random() * 2, gx + 30, gy + 1 + Math.random() * 2, gx + 50, gy - 1);
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = 'rgba(0,0,0,0.03)';
+      for (let i = 0; i < 9; i++) ctx.fillRect(0, i * 32 - 1, 256, 1);
+      for (let i = 0; i < 4; i++) ctx.fillRect(i * 64 - 1, 0, 1, 256);
+      const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(2, 2); return t;
+    }
+
+    function createWallTexture() {
+      const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#f5e6d3'; ctx.fillRect(0, 0, 128, 128);
+      for (let i = 0; i < 8000; i++) {
+        ctx.fillStyle = `rgba(0,0,0,${Math.random() * 0.04})`;
+        ctx.fillRect(Math.random() * 128, Math.random() * 128, 1, 1);
+      }
+      ctx.fillStyle = 'rgba(0,0,0,0.015)';
+      for (let i = 0; i < 60; i++) ctx.fillRect(Math.random() * 128, Math.random() * 128, 2 + Math.random() * 4, 0.5);
+      const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(4, 3); return t;
+    }
+
+    function createRugTexture() {
+      const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#e8b4b8'; ctx.fillRect(0, 0, 128, 128);
+      for (let i = 0; i < 3000; i++) {
+        ctx.fillStyle = `rgba(200,120,122,${Math.random() * 0.15})`;
+        ctx.fillRect(Math.random() * 128, Math.random() * 128, 1 + Math.random() * 2, 1 + Math.random() * 2);
+      }
+      ctx.strokeStyle = 'rgba(200,120,122,0.25)'; ctx.lineWidth = 1.5;
+      for (let i = 0; i < 128; i += 16) {
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + 64, 64); ctx.lineTo(i + 128, 0); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(i, 128); ctx.lineTo(i + 64, 64); ctx.lineTo(i + 128, 128); ctx.stroke();
+      }
+      return new THREE.CanvasTexture(c);
+    }
+
+    function init3D() {
+      const container = document.getElementById('three-container');
+      if (!container) return;
+
+      scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0xf5e6d3, 6, 10);
+
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 20);
+      camera.position.set(0, 1.1, 3.8);
+      camera.lookAt(0, 0.15, -0.5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setClearColor(0x000000, 0);
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.1;
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffe4d0, 0.35);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xffd8b0, 0.9);
+      sunLight.position.set(2.5, 4, 0.5);
+      sunLight.castShadow = true;
+      sunLight.shadow.mapSize.width = 1024;
+      sunLight.shadow.mapSize.height = 1024;
+      sunLight.shadow.camera.near = 0.5;
+      sunLight.shadow.camera.far = 8;
+      sunLight.shadow.camera.left = -3.5;
+      sunLight.shadow.camera.right = 3.5;
+      sunLight.shadow.camera.top = 3.5;
+      sunLight.shadow.camera.bottom = -3.5;
+      sunLight.shadow.bias = -0.0005;
+      scene.add(sunLight);
+
+      const fillLight = new THREE.DirectionalLight(0xd4a8ff, 0.25);
+      fillLight.position.set(-2, 1.5, -2);
+      scene.add(fillLight);
+
+      const windowLight = new THREE.SpotLight(0xffd8b0, 0.15, 5, Math.PI / 6, 0.5);
+      windowLight.position.set(1.2, 1.8, -1.8);
+      windowLight.target.position.set(0.5, 0.1, -0.2);
+      scene.add(windowLight); scene.add(windowLight.target);
+
+      room = createRoom();
+      scene.add(room);
+
+      for (let i = 0; i < 40; i++) {
+        const size = 0.008 + Math.random() * 0.015;
+        const geo = new THREE.SphereGeometry(size, 4, 4);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0xffd700, transparent: true, opacity: 0.1 + Math.random() * 0.2,
+        });
+        const p = new THREE.Mesh(geo, mat);
+        p.position.set((Math.random() - 0.5) * 3, Math.random() * 1.8 + 0.2, (Math.random() - 0.5) * 2 - 0.3);
+        p.userData = { speed: 0.08 + Math.random() * 0.15, offset: Math.random() * Math.PI * 2 };
+        scene.add(p); particles.push(p);
+      }
+
+      window.addEventListener('resize', () => {
+        const cw = container.clientWidth, ch = container.clientHeight;
+        camera.aspect = cw / ch; camera.updateProjectionMatrix();
+        renderer.setSize(cw, ch);
+      });
+
+      animate();
+    }
+
+    function createRoom() {
+      const group = new THREE.Group();
+      const woodTex = createWoodTexture();
+      const wallTex = createWallTexture();
+      const rugTex = createRugTexture();
+
+      const wallMat = new THREE.MeshStandardMaterial({ map: wallTex, roughness: 0.6, metalness: 0 });
+      const W = 4.4, D = 3.4, H = 2.8;
+
+      const floor = new THREE.Mesh(
+        new THREE.BoxGeometry(W, 0.08, D),
+        new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.65, metalness: 0.02 })
+      );
+      floor.position.set(0, -0.04, -0.5); floor.receiveShadow = true; group.add(floor);
+
+      const backWall = new THREE.Mesh(new THREE.BoxGeometry(W, H, 0.06), wallMat);
+      backWall.position.set(0, H/2 - 0.04, -D/2 + 0.03); backWall.receiveShadow = true; group.add(backWall);
+
+      const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.06, H, D), wallMat);
+      leftWall.position.set(-W/2 + 0.03, H/2 - 0.04, -0.5); leftWall.receiveShadow = true; group.add(leftWall);
+
+      const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.06, H, D), wallMat);
+      rightWall.position.set(W/2 - 0.03, H/2 - 0.04, -0.5); rightWall.receiveShadow = true; group.add(rightWall);
+
+      const ceiling = new THREE.Mesh(
+        new THREE.BoxGeometry(W, 0.04, D),
+        new THREE.MeshStandardMaterial({ color: 0xf0e0d0, roughness: 0.9, metalness: 0 })
+      );
+      ceiling.position.set(0, H - 0.02, -0.5); group.add(ceiling);
+
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0xe8d8c0, roughness: 0.6, metalness: 0 });
+      [-W/2+0.08, W/2-0.08].forEach(x => {
+        const b = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, D-0.2), baseMat);
+        b.position.set(x, 0.02, -0.5); group.add(b);
+      });
+      const bb = new THREE.Mesh(new THREE.BoxGeometry(W-0.2, 0.12, 0.12), baseMat);
+      bb.position.set(0, 0.02, -D/2+0.08); group.add(bb);
+
+      const bedMat = new THREE.MeshStandardMaterial({ color: 0xf8f4f0, roughness: 0.85, metalness: 0 });
+      const bed = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.3, 2.0), bedMat);
+      bed.position.set(-0.7, 0.11, -0.3); bed.castShadow = true; bed.receiveShadow = true; group.add(bed);
+
+      const hbMat = new THREE.MeshStandardMaterial({ color: 0xf4a6b0, roughness: 0.45, metalness: 0.05 });
+      const headboard = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.65, 0.06, 2, 2, 2), hbMat);
+      headboard.position.set(-0.7, 0.4, -1.37); headboard.castShadow = true; group.add(headboard);
+
+      const pillowMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9, metalness: 0 });
+      [-0.9, -0.5].forEach(x => {
+        const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.1, 0.3, 4, 2, 4), pillowMat);
+        p.position.set(x, 0.28, -1.15); p.castShadow = true; group.add(p);
+      });
+
+      const throwMat = new THREE.MeshStandardMaterial({ color: 0xe8b4b8, roughness: 0.7, metalness: 0 });
+      const tp = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.08, 0.28, 4, 2, 4), throwMat);
+      tp.position.set(-0.3, 0.27, -1.1); tp.castShadow = true; group.add(tp);
+
+      const blanketMat = new THREE.MeshStandardMaterial({ color: 0xfaf0f0, roughness: 0.8, metalness: 0 });
+      const blanket = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.04, 1.4, 2, 1, 2), blanketMat);
+      blanket.position.set(-0.7, 0.19, -0.1); blanket.castShadow = true; group.add(blanket);
+
+      const nsMat = new THREE.MeshStandardMaterial({ color: 0xa08060, roughness: 0.5, metalness: 0.15 });
+      const nightstand = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.42, 0.42, 2, 2, 2), nsMat);
+      nightstand.position.set(1.0, 0.17, -1.3); nightstand.castShadow = true; nightstand.receiveShadow = true; group.add(nightstand);
+      const nsLeg = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.04, 0.38), nsMat);
+      nsLeg.position.set(1.0, 0.36, -1.3); group.add(nsLeg);
+
+      const lampMat = new THREE.MeshStandardMaterial({ color: 0xc8a96a, roughness: 0.25, metalness: 0.6 });
+      const lb = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.09, 0.02, 12), lampMat);
+      lb.position.set(1.0, 0.41, -1.3); group.add(lb);
+      const ls = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.16, 6), lampMat);
+      ls.position.set(1.0, 0.5, -1.3); group.add(ls);
+      const shadeMat = new THREE.MeshStandardMaterial({
+        color: 0xf5e6d3, roughness: 0.8, metalness: 0,
+        emissive: 0xffd700, emissiveIntensity: 0.12,
+      });
+      const shade = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.09, 12, 1), shadeMat);
+      shade.position.set(1.0, 0.62, -1.3); group.add(shade);
+
+      const wfMat = new THREE.MeshStandardMaterial({ color: 0xf0ebe0, roughness: 0.3, metalness: 0.05 });
+      const wf = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.02, 0.7), wfMat);
+      wf.position.set(1.0, 1.0, -1.99); group.add(wf);
+      const wgMat = new THREE.MeshStandardMaterial({
+        color: 0xb0d8f0, roughness: 0.05, metalness: 0,
+        emissive: 0x87ceeb, emissiveIntensity: 0.15,
+        transparent: true, opacity: 0.4,
+      });
+      const wg = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.02, 0.6), wgMat);
+      wg.position.set(1.0, 1.0, -1.99); group.add(wg);
+      const wbarMat = new THREE.MeshStandardMaterial({ color: 0xf0ebe0, roughness: 0.3, metalness: 0.05 });
+      [-0.33, 0.33].forEach(x => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.6, 0.02), wbarMat);
+        bar.position.set(1.0 + x, 1.0, -1.99); group.add(bar);
+      });
+      [0.66, 1.34].forEach(y => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.02, 0.02), wbarMat);
+        bar.position.set(1.0, y, -1.99); group.add(bar);
+      });
+      const wsMat = new THREE.MeshStandardMaterial({ color: 0xe8ddd0, roughness: 0.4, metalness: 0 });
+      const ws = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.04, 0.1), wsMat);
+      ws.position.set(1.0, 0.64, -1.97); group.add(ws);
+
+      const pmMat = new THREE.MeshStandardMaterial({ color: 0xc8a96a, roughness: 0.3, metalness: 0.4 });
+      const picFrames = [[-1.5, 0xe8b4b8], [0.2, 0xb0d4b8]];
+      picFrames.forEach(([x, color]) => {
+        const pm = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.02, 0.25, 2, 1, 2), pmMat);
+        pm.position.set(x, 1.1, -1.99); group.add(pm);
+        const pi = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.01, 0.2, 2, 1, 2),
+          new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0 }));
+        pi.position.set(x, 1.1, -1.99); group.add(pi);
+      });
+
+      const rug = new THREE.Mesh(
+        new THREE.BoxGeometry(0.8, 0.025, 1.2, 2, 1, 2),
+        new THREE.MeshStandardMaterial({ map: rugTex, roughness: 0.9, metalness: 0 })
+      );
+      rug.position.set(-0.2, 0.005, -0.2); rug.receiveShadow = true; group.add(rug);
+
+      return group;
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+
+      const speed = 0.04;
+      const cx = Math.sin(t * speed) * 2.0;
+      const cz = Math.cos(t * speed) * 1.8 + 1.2;
+      camera.position.set(cx, 1.05 + Math.sin(t * 0.2) * 0.03, cz);
+      camera.lookAt(0, 0.1, -0.5);
+
+      particles.forEach(p => {
+        const d = p.userData;
+        p.position.y += Math.sin(t * d.speed + d.offset) * 0.0008;
+        p.position.x += Math.sin(t * d.speed * 0.5 + d.offset) * 0.0003;
+      });
+
+      if (renderer && scene && camera) renderer.render(scene, camera);
+    }
+
     function initPhotoUpload() {
-      // Host photo
       const photoInput = document.getElementById('photoInput');
       const photoUpload = document.getElementById('photoUpload');
       const hostPhoto = document.getElementById('hostPhoto');
@@ -1000,7 +1258,7 @@
       };
 
       const photoTag = data.photoData ? 
-        '<img src="' + data.photoData + '" style="width:100px;height:100px;border-radius:50%;margin:0 auto 12px;display:block;border:3px solid rgba(255,255,255,0.3);object-fit:cover;">' : 
+        '<img src="' + data.photoData + '" style="width:100px;height:100px;border-radius:50%;margin:0 auto 12px;display:block;border:3px solid var(--muted-gold);object-fit:cover;">' : 
         '<div style="font-size:96px;opacity:0.9;">&#127968;</div>';
 
       let html = '<!DOCTYPE html>\n';
@@ -1011,77 +1269,93 @@
       html += '  <title>' + escapeHtml(data.propName) + ' - Guest Guide</title>\n';
       html += '  <style>\n';
       html += '    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}\n';
-      html += '    :root{--deep-forest:#0F2F2A;--soft-sage:#A8C3B0;--warm-white:#F7F7F5;--charcoal:#1E1E1E;--muted-gold:#C8A96A;}\n';
-      html += '    body{font-family:"Segoe UI",sans-serif;line-height:1.6;color:var(--charcoal);background:var(--deep-forest);overflow-x:hidden;-webkit-font-smoothing:antialiased;}\n';
+      html += '    :root{--deep-forest:#0F2F2A;--soft-sage:#A8C3B0;--warm-white:#F7F7F5;--charcoal:#1E1E1E;--muted-gold:#C8A96A;--gold-dark:#B89B5E;}\n';
+      html += '    ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--deep-forest);}::-webkit-scrollbar-thumb{background:var(--muted-gold);border-radius:3px;}\n';
+      html += '    body{font-family:"Inter",sans-serif;line-height:1.6;color:var(--charcoal);background:var(--deep-forest);overflow-x:hidden;-webkit-font-smoothing:antialiased;}\n';
       html += '    .app-container{max-width:1080px;width:100%;margin:0 auto;position:relative;background:white;}\n';
-      html += '    .page{display:none;flex-direction:column;align-items:center;gap:24px;padding:80px 20px 160px;text-align:center;min-height:100vh;}\n';
+      html += '    .page{display:none;flex-direction:column;align-items:center;gap:24px;padding:80px 20px 160px;text-align:center;min-height:100vh;animation:fadeIn 0.5s ease;}\n';
+      html += '    @keyframes fadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}\n';
       html += '    .page.active{display:flex;}\n';
       html += '    .page-content{display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;max-width:100%;padding:10px 0;}\n';
       html += '    h1,h2{font-family:"Playfair Display",serif;font-weight:700;line-height:1.2;color:var(--deep-forest);}\n';
       html += '    h1{font-size:42px;}h2{font-size:32px;}\n';
-      html += '    .subtext{font-size:18px;color:#666;max-width:500px;font-weight:300;letter-spacing:0.5px;line-height:1.5;}\n';
-      html += '    .cta-btn{padding:18px 32px;font-size:16px;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:all 0.2s ease;min-height:56px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;}\n';
-      html += '    .cta-btn:active{transform:scale(0.98);}\n';
-      html += '    .gold-btn{background:var(--muted-gold);color:white;box-shadow:0 8px 24px rgba(200,169,106,0.3);}\n';
-      html += '    .back-btn{position:fixed;top:20px;left:20px;background:none;border:2px solid rgba(168,195,176,0.4);width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;color:var(--charcoal);display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:20;}\n';
-      html += '    .back-btn:active{background:var(--warm-white);}\n';
-      html += '    .dark-page .back-btn{border-color:rgba(255,255,255,0.3);color:white;}\n';
-      html += '    .page-cover{background:linear-gradient(135deg,var(--deep-forest) 0%,var(--soft-sage) 100%);color:white;padding-top:60px;}\n';
+      html += '    .subtext{font-size:18px;color:#888;max-width:500px;font-weight:300;letter-spacing:0.5px;line-height:1.5;}\n';
+      html += '    .cta-btn{padding:18px 32px;font-size:16px;font-weight:700;border:none;border-radius:50px;cursor:pointer;transition:all 0.3s ease;min-height:56px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Inter",sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;}\n';
+      html += '    .cta-btn:active{transform:scale(0.97);}\n';
+      html += '    .gold-btn{background:linear-gradient(135deg,var(--muted-gold) 0%,var(--gold-dark) 100%);color:#0F2F2A;box-shadow:0 8px 24px rgba(200,169,106,0.3);}\n';
+      html += '    .gold-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,169,106,0.4);}\n';
+      html += '    .back-btn{position:fixed;top:20px;left:20px;background:rgba(255,255,255,0.9);border:1px solid rgba(200,169,106,0.2);width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;color:var(--deep-forest);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;z-index:20;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}\n';
+      html += '    .back-btn:hover{transform:scale(1.05);border-color:var(--muted-gold);}\n';
+      html += '    .dark-page .back-btn{background:rgba(15,47,42,0.9);border-color:rgba(200,169,106,0.3);color:white;}\n';
+      html += '    .page-cover{background:linear-gradient(135deg,var(--deep-forest) 0%,#1a5a50 50%,var(--deep-forest) 100%);color:white;padding-top:60px;}\n';
       html += '    .page-cover h1{color:white;font-size:44px;line-height:1.1;}\n';
-      html += '    .page-cover .subtext{color:rgba(255,255,255,0.8);}\n';
-      html += '    .host-section{margin-top:20px;padding:20px;background:rgba(255,255,255,0.1);border-radius:20px;max-width:100%;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.3);}\n';
-      html += '    .host-name{font-family:"Playfair Display",serif;font-size:20px;color:white;margin-bottom:6px;}\n';
-      html += '    .host-message{font-size:14px;color:rgba(255,255,255,0.9);font-style:italic;line-height:1.5;}\n';
+      html += '    .page-cover .subtext{color:rgba(255,255,255,0.7);}\n';
+      html += '    .host-section{margin-top:20px;padding:24px;background:rgba(255,255,255,0.06);border-radius:20px;max-width:100%;border:1px solid rgba(200,169,106,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.2);}\n';
+      html += '    .host-name{font-family:"Playfair Display",serif;font-size:20px;color:var(--muted-gold);margin-bottom:6px;}\n';
+      html += '    .host-message{font-size:14px;color:rgba(255,255,255,0.85);font-style:italic;line-height:1.6;}\n';
       html += '    .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:100%;}\n';
-      html += '    .menu-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px;border-radius:16px;background:white;cursor:pointer;transition:all 0.2s ease;border:1px solid rgba(168,195,176,0.2);box-shadow:0 4px 16px rgba(0,0,0,0.04);min-height:110px;justify-content:center;}\n';
-      html += '    .menu-item:active{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}\n';
-      html += '    .menu-icon-circle{width:70px;height:70px;border-radius:50%;background:var(--warm-white);display:flex;align-items:center;justify-content:center;border:2px solid rgba(168,195,176,0.3);}\n';
+      html += '    .menu-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px;border-radius:16px;background:white;cursor:pointer;transition:all 0.3s ease;border:1px solid rgba(200,169,106,0.15);box-shadow:0 4px 16px rgba(0,0,0,0.04);min-height:110px;justify-content:center;}\n';
+      html += '    .menu-item:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08);border-color:var(--muted-gold);}\n';
+      html += '    .menu-icon-circle{width:70px;height:70px;border-radius:50%;background:var(--warm-white);display:flex;align-items:center;justify-content:center;border:2px solid rgba(200,169,106,0.2);transition:border-color 0.3s ease;}\n';
+      html += '    .menu-item:hover .menu-icon-circle{border-color:var(--muted-gold);}\n';
       html += '    .menu-icon-emoji{font-size:32px;}\n';
       html += '    .menu-label{font-size:14px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;}\n';
-      html += '    .light-page{background:var(--warm-white);}\n';
-      html += '    .dark-page{background:var(--deep-forest);color:white;}\n';
+      html += '    .light-page{background:linear-gradient(180deg,#F7F7F5 0%,#f0efe8 100%);}\n';
+      html += '    .dark-page{background:linear-gradient(180deg,var(--deep-forest) 0%,#081F1B 100%);color:white;}\n';
       html += '    .dark-page h2{color:white;}\n';
       html += '    .dark-page .subtext{color:var(--soft-sage);}\n';
-      html += '    .card{padding:20px 16px;background:white;border-radius:20px;width:100%;max-width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(168,195,176,0.2);text-align:left;}\n';
-      html += '    .dark-page .card{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:white;}\n';
+      html += '    .card{padding:20px 16px;background:white;border-radius:20px;width:100%;max-width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.06);border:1px solid rgba(200,169,106,0.15);text-align:left;transition:border-color 0.3s ease;}\n';
+      html += '    .card:hover{border-color:rgba(200,169,106,0.35);}\n';
+      html += '    .dark-page .card{background:rgba(255,255,255,0.05);border-color:rgba(200,169,106,0.15);color:white;}\n';
+      html += '    .dark-page .card:hover{border-color:rgba(200,169,106,0.3);}\n';
       html += '    .wifi-credential{font-size:24px;font-weight:600;margin:12px 0;color:var(--deep-forest);word-break:break-all;}\n';
-      html += '    .dark-page .wifi-credential{color:white;}\n';
-      html += '    .copy-btn{padding:14px 28px;font-size:14px;font-weight:600;border:none;border-radius:50px;cursor:pointer;background:var(--muted-gold);color:white;min-height:48px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;margin-top:16px;}\n';
+      html += '    .dark-page .wifi-credential{color:var(--muted-gold);}\n';
+      html += '    .copy-btn{padding:14px 28px;font-size:14px;font-weight:700;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(135deg,var(--muted-gold) 0%,var(--gold-dark) 100%);color:#0F2F2A;min-height:48px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Inter",sans-serif;margin-top:16px;transition:all 0.3s ease;box-shadow:0 4px 16px rgba(200,169,106,0.3);}\n';
+      html += '    .copy-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,106,0.4);}\n';
       html += '    .checklist{list-style:none;width:100%;max-width:100%;text-align:left;font-size:16px;font-weight:400;}\n';
-      html += '    .checklist li{padding:14px 0;border-bottom:1px solid rgba(168,195,176,0.2);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}\n';
+      html += '    .checklist li{padding:14px 0;border-bottom:1px solid rgba(200,169,106,0.12);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}\n';
       html += '    .checklist li:last-child{border-bottom:none;}\n';
-      html += '    .dark-page .checklist li{border-bottom-color:rgba(255,255,255,0.2);}\n';
-      html += '    .step-card{display:flex;align-items:center;gap:14px;padding:16px;background:white;border-radius:16px;width:100%;max-width:100%;box-shadow:0 4px 16px rgba(0,0,0,0.04);border:1px solid rgba(168,195,176,0.2);margin-bottom:12px;text-align:left;}\n';
-      html += '    .dark-page .step-card{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);}\n';
-      html += '    .step-number{width:44px;height:44px;min-width:44px;border-radius:12px;background:var(--deep-forest);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}\n';
+      html += '    .dark-page .checklist li{border-bottom-color:rgba(200,169,106,0.15);}\n';
+      html += '    .step-card{display:flex;align-items:center;gap:14px;padding:16px;background:white;border-radius:16px;width:100%;max-width:100%;box-shadow:0 4px 16px rgba(0,0,0,0.04);border:1px solid rgba(200,169,106,0.12);margin-bottom:12px;text-align:left;transition:border-color 0.3s ease,box-shadow 0.3s ease;}\n';
+      html += '    .step-card:hover{border-color:rgba(200,169,106,0.3);box-shadow:0 8px 24px rgba(0,0,0,0.06);}\n';
+      html += '    .dark-page .step-card{background:rgba(255,255,255,0.05);border-color:rgba(200,169,106,0.12);}\n';
+      html += '    .step-number{width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--deep-forest) 0%,#1a5a50 100%);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}\n';
       html += '    .step-text{font-size:16px;font-weight:500;color:var(--charcoal);line-height:1.4;}\n';
       html += '    .dark-page .step-text{color:white;}\n';
-      html += '    .place-card{width:100%;max-width:100%;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(168,195,176,0.2);margin-bottom:16px;}\n';
+      html += '    .place-card{width:100%;max-width:100%;background:white;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(200,169,106,0.12);margin-bottom:16px;transition:border-color 0.3s ease,box-shadow 0.3s ease;}\n';
+      html += '    .place-card:hover{border-color:rgba(200,169,106,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.08);}\n';
       html += '    .place-image{width:100%;height:160px;background:linear-gradient(135deg,var(--soft-sage),var(--deep-forest));display:flex;align-items:center;justify-content:center;font-size:48px;}\n';
       html += '    .place-content{padding:16px;text-align:left;}\n';
       html += '    .place-name{font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:6px;}\n';
       html += '    .place-desc{font-size:14px;color:#666;margin-bottom:16px;}\n';
-      html += '    .map-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;background:var(--muted-gold);color:white;text-decoration:none;border-radius:50px;font-size:14px;font-weight:500;letter-spacing:0.5px;min-height:44px;width:100%;}\n';
-      html += '    .contact-btn{display:flex;align-items:center;gap:14px;padding:18px 20px;min-height:64px;width:100%;max-width:100%;border-radius:16px;border:2px solid rgba(168,195,176,0.3);background:white;cursor:pointer;transition:all 0.2s;margin-bottom:12px;text-decoration:none;}\n';
-      html += '    .contact-btn:active{background:var(--warm-white);transform:scale(0.98);}\n';
+      html += '    .map-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,var(--muted-gold) 0%,var(--gold-dark) 100%);color:#0F2F2A;text-decoration:none;border-radius:50px;font-size:14px;font-weight:600;letter-spacing:0.5px;min-height:44px;width:100%;transition:all 0.3s ease;box-shadow:0 4px 16px rgba(200,169,106,0.3);}\n';
+      html += '    .map-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,106,0.4);}\n';
+      html += '    .contact-btn{display:flex;align-items:center;gap:14px;padding:18px 20px;min-height:64px;width:100%;max-width:100%;border-radius:16px;border:1px solid rgba(200,169,106,0.15);background:white;cursor:pointer;transition:all 0.3s ease;margin-bottom:12px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.04);}\n';
+      html += '    .contact-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.06);border-color:var(--muted-gold);}\n';
+      html += '    .contact-btn:active{transform:scale(0.98);}\n';
       html += '    .contact-btn-icon{font-size:24px;}\n';
       html += '    .contact-btn-text{font-size:16px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;}\n';
       html += '    .contact-btn-sub{font-size:13px;color:#888;font-weight:400;}\n';
       html += '    .call-btn{background:var(--deep-forest);border-color:var(--deep-forest);}\n';
+      html += '    .call-btn:hover{background:#1a5a50;border-color:#1a5a50;}\n';
       html += '    .call-btn .contact-btn-text{color:white;}\n';
       html += '    .call-btn .contact-btn-sub{color:rgba(255,255,255,0.7);}\n';
       html += '    .emergency-btn{background:#dc2626;border-color:#dc2626;}\n';
+      html += '    .emergency-btn:hover{background:#b91c1c;border-color:#b91c1c;}\n';
       html += '    .emergency-btn .contact-btn-text{color:white;}\n';
       html += '    .emergency-btn .contact-btn-sub{color:rgba(255,255,255,0.7);}\n';
-      html += '    .review-headline{color:white;font-size:44px;line-height:1.1;}\n';
+      html += '    .review-headline{color:white;font-family:"Playfair Display",serif;font-size:44px;line-height:1.1;}\n';
       html += '    .stars-row{font-size:48px;letter-spacing:8px;margin:20px 0;}\n';
       html += '    .review-subtext{font-size:18px;color:var(--soft-sage);max-width:400px;line-height:1.5;}\n';
-      html += '    .review-cta{padding:18px 36px;font-size:18px;font-weight:700;border:none;border-radius:50px;cursor:pointer;background:var(--muted-gold);color:white;min-height:64px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(200,169,106,0.4);}\n';
-      html += '    .footer-brand{font-size:14px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-top:20px;padding-bottom:20px;}\n';
+      html += '    .review-cta{padding:18px 36px;font-size:18px;font-weight:700;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(135deg,var(--muted-gold) 0%,var(--gold-dark) 100%);color:#0F2F2A;min-height:64px;width:100%;max-width:100%;letter-spacing:1px;text-transform:uppercase;font-family:"Inter",sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(200,169,106,0.4);transition:all 0.3s ease;}\n';
+      html += '    .review-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,169,106,0.5);}\n';
+      html += '    .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,169,106,0.3),rgba(200,169,106,0.5),rgba(200,169,106,0.3),transparent);margin:20px 0;width:100%;}\n';
+      html += '    .footer-brand{font-size:14px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-top:20px;padding-bottom:20px;}\n';
       html += '    .toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:var(--deep-forest);color:white;padding:16px 32px;border-radius:50px;font-size:16px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.2);z-index:1000;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}\n';
       html += '    .toast.show{opacity:1;}\n';
-      html += '    .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:100px;background:white;box-shadow:0 -4px 20px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0);}\n';
-      html += '    .nav-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:12px 20px;min-height:70px;justify-content:center;border-radius:16px;transition:background 0.2s;}\n';
+      html += '    .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:100px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(200,169,106,0.15);display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0);}\n';
+      html += '    .nav-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:12px 20px;min-height:70px;justify-content:center;border-radius:16px;transition:all 0.2s ease;}\n';
+      html += '    .nav-item:hover{background:rgba(200,169,106,0.08);}\n';
       html += '    .nav-icon{font-size:28px;}\n';
       html += '    .nav-label{font-size:11px;font-weight:600;color:var(--charcoal);letter-spacing:0.5px;text-transform:uppercase;}\n';
       html += '  </style>\n';
@@ -1315,30 +1589,30 @@
       html += '\n';
       html += '    <!-- PAGE 13: BUILDING AMENITIES -->\n';
       html += '    <div class="page light-page" id="page-13">\n';
-      html += '      <button class="back-btn" data-target="page-2">←</button>\n';
+      html += '      <button class="back-btn" data-target="page-2">â†</button>\n';
       html += '      <div class="page-content">\n';
       html += '        <h2>Building Amenities</h2>\n';
       html += '        <div class="card">\n';
       if (data.gymPhotoData) {
         html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.gymPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
       }
-      html += '          <p style="margin-bottom:12px;">🏋 Gym: ' + escapeHtml(data.gym) + '</p>\n';
+      html += '          <p style="margin-bottom:12px;">ðŸ‹ Gym: ' + escapeHtml(data.gym) + '</p>\n';
       if (data.poolPhotoData) {
         html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.poolPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
       }
-      html += '          <p style="margin-bottom:12px;">🏊 Pool: ' + escapeHtml(data.pool) + '</p>\n';
+      html += '          <p style="margin-bottom:12px;">ðŸŠ Pool: ' + escapeHtml(data.pool) + '</p>\n';
       if (data.parkingPhotoData) {
         html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.parkingPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
       }
-      html += '          <p style="margin-bottom:12px;">🅿 Parking: ' + escapeHtml(data.parking) + '</p>\n';
+      html += '          <p style="margin-bottom:12px;">ðŸ…¿ Parking: ' + escapeHtml(data.parking) + '</p>\n';
       if (data.securityPhotoData) {
         html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.securityPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
       }
-      html += '          <p style="margin-bottom:12px;">🔒 Security: ' + escapeHtml(data.security) + '</p>\n';
+      html += '          <p style="margin-bottom:12px;">ðŸ”’ Security: ' + escapeHtml(data.security) + '</p>\n';
       if (data.otherPhotoData) {
         html += '          <div style="text-align:center;margin-bottom:12px;"><img src="' + data.otherPhotoData + '" style="width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:12px;"></div>\n';
       }
-      html += '          <p style="margin-bottom:12px;">✨ Other: ' + escapeHtml(data.otherAmenities) + '</p>\n';
+      html += '          <p style="margin-bottom:12px;">âœ¨ Other: ' + escapeHtml(data.otherAmenities) + '</p>\n';
       html += '        </div>\n';
       html += '      </div>\n';
       html += '    </div>\n';
@@ -1386,6 +1660,7 @@
 
     function init() {
       initPhotoUpload();
+      init3D();
       const generateBtn = document.getElementById('generateBtn');
       if (generateBtn) {
         generateBtn.addEventListener('click', generatePacket);
@@ -1570,6 +1845,8 @@
       reader.readAsText(file);
       e.target.value = '';
     });
-  </script>
+
+</script>
 </body>
 </html>
+
