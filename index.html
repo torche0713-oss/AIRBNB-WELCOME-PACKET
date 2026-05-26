@@ -235,6 +235,15 @@
       font-size: 12px;
       color: #666;
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -452,6 +461,21 @@
 
     setTimeout(showPopup, 2000);
     setInterval(showPopup, 12000);
+
+    (function initReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.hero > *, .hook-box, .stat-box, .value-prop, .preview-mockup, .cta-button').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>

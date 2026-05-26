@@ -339,6 +339,15 @@
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(200,169,106,0.4);
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .footer {
       text-align: center;
       color: rgba(255,255,255,0.2);
@@ -1858,6 +1867,21 @@
       reader.readAsText(file);
       e.target.value = '';
     });
+
+    (function initReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.card, .section-divider, .cover-feature, .cover-badge').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+      });
+    })();
 
 </script>
 </body>
